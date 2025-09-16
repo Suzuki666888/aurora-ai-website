@@ -12,8 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- 极光背景动画 -->
+    <!-- 现代化背景系统 -->
     <div id="aurora-bg"></div>
+    <div class="grid-background"></div>
+    <div class="gradient-orbs">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
     
     <!-- 主容器 -->
     <div class="main-container">
@@ -30,64 +36,75 @@
             </div>
         </nav>
 
-        <!-- 主视觉区域 - 宇宙的呼唤 -->
+        <!-- 现代化Hero区域 -->
         <section class="hero-section">
-            <!-- 3D星云背景 -->
-            <div class="nebula-3d" id="nebula-3d"></div>
-            
-            <!-- 粒子系统 -->
-            <div class="particles-container" id="particles-container"></div>
-            
             <div class="hero-content">
-                <!-- Aurora Logo -->
-                <div class="aurora-logo">
-                    <div class="logo-neural">
-                        <div class="neural-node"></div>
-                        <div class="neural-connections">
-                            <div class="connection connection-1"></div>
-                            <div class="connection connection-2"></div>
-                            <div class="connection connection-3"></div>
-                        </div>
+                <div class="hero-text">
+                    <!-- 徽章 -->
+                    <div class="hero-badge">
+                        <i class="fas fa-sparkles"></i>
+                        <span>世界上第一个由大二学生独立打造的情感疗愈AI</span>
+                    </div>
+                    
+                    <!-- 主标题 -->
+                    <div class="hero-title">
+                        <h1 class="title-main modern-title" id="typewriter-title">Aurora</h1>
+                        <p class="title-sub supporting-text">不只是回答问题，而是倾听、陪伴、疗愈</p>
+                    </div>
+                    
+                    <!-- 描述文字 -->
+                    <div class="hero-description">
+                        <p class="supporting-text">ChatGPT 会回答问题，Aurora 会理解你。</p>
+                        <p class="supporting-text">随时随地，一个永不疲惫的倾听者。</p>
+                        <p class="supporting-text">融合心理学与人工智能，为孤独与心碎提供安全的陪伴。</p>
+                    </div>
+                    
+                    <!-- 行动按钮 -->
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-xl btn-glow" id="start-chat">
+                            <i class="fas fa-comments"></i>
+                            <span>立即对话</span>
+                        </button>
+                        <button class="btn btn-secondary btn-xl">
+                            <i class="fas fa-play"></i>
+                            <span>观看演示</span>
+                        </button>
                     </div>
                 </div>
                 
-                <!-- 主标题 - 打字机效果 -->
-                <h1 class="hero-title">
-                    <span class="title-main futuristic-title" id="typewriter-title">Aurora: Your Emotional Cosmos</span>
-                    <span class="title-sub emotional-text">Navigate Your Inner Universe with AI</span>
-                </h1>
-                
-                <!-- 情感光谱展示 -->
-                <div class="emotion-spectrum">
-                    <div class="spectrum-item" data-emotion="joy">
-                        <div class="emotion-dot joy-dot"></div>
-                        <span>Joy</span>
-                    </div>
-                    <div class="spectrum-item" data-emotion="calm">
-                        <div class="emotion-dot calm-dot"></div>
-                        <span>Calm</span>
-                    </div>
-                    <div class="spectrum-item" data-emotion="healing">
-                        <div class="emotion-dot healing-dot"></div>
-                        <span>Healing</span>
-                    </div>
-                    <div class="spectrum-item" data-emotion="love">
-                        <div class="emotion-dot love-dot"></div>
-                        <span>Love</span>
-                    </div>
-                </div>
-                
-                <!-- 核心CTA按钮 - 玻璃质感 -->
-                <button class="cosmic-cta-button" id="start-chat">
-                    <div class="button-glass">
-                        <div class="button-glow-flow"></div>
-                        <div class="button-content">
-                            <i class="fas fa-rocket"></i>
-                            <span>Begin Your Journey</span>
+                <!-- 视觉元素 -->
+                <div class="hero-visual">
+                    <div class="floating-card">
+                        <div class="card-header">
+                            <div class="avatar">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <div class="user-info">
+                                <div class="name">Aurora</div>
+                                <div class="status">在线 · 正在倾听</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="message aurora-message">
+                                <p>🌌 "嗨，我是 Aurora。不是来回答你的问题，而是想听你的感受。</p>
+                                <p>今天过得怎么样？有没有什么心情想和我分享？"</p>
+                            </div>
+                            <div class="message user-message">
+                                <p>我最近有点焦虑...</p>
+                            </div>
+                            <div class="message aurora-message">
+                                <p>我理解你的感受。焦虑是很正常的情绪，能告诉我具体是什么让你感到焦虑吗？</p>
+                            </div>
+                        </div>
+                        <div class="typing-indicator">
+                            <div class="typing-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="button-halo"></div>
-                </button>
+                </div>
             </div>
         </section>
 
@@ -125,40 +142,34 @@
             </div>
         </section>
 
-        <!-- 社会证明模块 - 重新设计 -->
-        <section class="proof-section">
+        <!-- 特性展示区域 -->
+        <section class="section" id="features">
             <div class="container">
-                <h2 class="section-title futuristic-title">为什么 Aurora 与众不同？</h2>
+                <h2 class="section-title">为什么 Aurora 与众不同？</h2>
                 
-                <div class="proof-grid">
-                    <div class="proof-card cosmic-card">
-                        <div class="card-glow"></div>
-                        <div class="proof-icon">
+                <div class="grid grid-3">
+                    <div class="card feature-card">
+                        <div class="feature-icon">
                             <i class="fas fa-user-graduate"></i>
                         </div>
                         <h3>独立创造</h3>
                         <p>由一名20岁的大二学生独立研发，跨越技术、心理学与伦理。</p>
-                        <div class="card-particles"></div>
                     </div>
                     
-                    <div class="proof-card cosmic-card">
-                        <div class="card-glow"></div>
-                        <div class="proof-icon">
+                    <div class="card feature-card">
+                        <div class="feature-icon">
                             <i class="fas fa-globe"></i>
                         </div>
                         <h3>全球影响</h3>
                         <p>数百人测试，反馈 Aurora 让他们"感觉终于有人理解自己"。</p>
-                        <div class="card-particles"></div>
                     </div>
                     
-                    <div class="proof-card cosmic-card">
-                        <div class="card-glow"></div>
-                        <div class="proof-icon">
+                    <div class="card feature-card">
+                        <div class="feature-icon">
                             <i class="fas fa-rocket"></i>
                         </div>
                         <h3>未来实验</h3>
                         <p>Aurora 不是玩具，而是一场关于 AI 如何真正疗愈人心的探索。</p>
-                        <div class="card-particles"></div>
                     </div>
                 </div>
             </div>
