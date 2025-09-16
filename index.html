@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora - 情感疗愈AI</title>
+    <meta name="description" content="Aurora：世界上第一个由大二学生独立打造的情感疗愈AI。不只是回答问题，而是倾听、陪伴、疗愈。">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 极光背景动画 -->
+    <div id="aurora-bg"></div>
+    
+    <!-- 主容器 -->
+    <div class="main-container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-magic"></i>
+                <span>Aurora</span>
+            </div>
+            <div class="nav-links">
+                <a href="#about">关于</a>
+                <a href="#testimonials">用户反馈</a>
+                <a href="#contact">联系</a>
+            </div>
+        </nav>
+
+        <!-- 主视觉区域 -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    <span>世界上第一个由大二学生独立打造的情感疗愈AI</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    <span class="title-main">Aurora</span>
+                    <span class="title-sub">不只是回答问题，而是倾听、陪伴、疗愈</span>
+                </h1>
+                
+                <div class="hero-description">
+                    <p>ChatGPT 会回答问题，Aurora 会理解你。</p>
+                    <p>随时随地，一个永不疲惫的倾听者。</p>
+                    <p>融合心理学与人工智能，为孤独与心碎提供安全的陪伴。</p>
+                </div>
+                
+                <button class="cta-button" id="start-chat">
+                    <i class="fas fa-comments"></i>
+                    <span>立即对话</span>
+                    <div class="button-glow"></div>
+                </button>
+            </div>
+        </section>
+
+        <!-- 社会证明模块 -->
+        <section class="proof-section" id="about">
+            <div class="container">
+                <h2 class="section-title">为什么 Aurora 与众不同？</h2>
+                
+                <div class="proof-grid">
+                    <div class="proof-card">
+                        <div class="proof-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>独立创造</h3>
+                        <p>由一名20岁的大二学生独立研发，跨越技术、心理学与伦理。</p>
+                    </div>
+                    
+                    <div class="proof-card">
+                        <div class="proof-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>全球影响</h3>
+                        <p>数百人测试，反馈 Aurora 让他们"感觉终于有人理解自己"。</p>
+                    </div>
+                    
+                    <div class="proof-card">
+                        <div class="proof-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>未来实验</h3>
+                        <p>Aurora 不是玩具，而是一场关于 AI 如何真正疗愈人心的探索。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 用户反馈模块 -->
+        <section class="testimonials-section" id="testimonials">
+            <div class="container">
+                <h2 class="section-title">用户真实反馈</h2>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Aurora让我感觉终于有人理解自己，那种被倾听的感觉真的很治愈。"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">小</div>
+                            <div class="author-info">
+                                <span class="author-name">小雨</span>
+                                <span class="author-title">大学生</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"作为一个内向的人，Aurora给了我一个安全的空间来表达情感。"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">明</div>
+                            <div class="author-info">
+                                <span class="author-name">小明</span>
+                                <span class="author-title">程序员</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Aurora的寄语卡片让我在朋友圈分享后，很多朋友都来问我这是什么。"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">丽</div>
+                            <div class="author-info">
+                                <span class="author-name">小丽</span>
+                                <span class="author-title">设计师</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 对话界面模态框 -->
+    <div class="chat-modal" id="chat-modal">
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-avatar">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <div class="chat-info">
+                    <h3>Aurora</h3>
+                    <span class="chat-status">在线 · 正在倾听</span>
+                </div>
+                <button class="close-chat" id="close-chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <div class="message aurora-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>🌌 "嗨，我是 Aurora。不是来回答你的问题，而是想听你的感受。</p>
+                        <p>今天过得怎么样？有没有什么心情想和我分享？无论开心还是难过，我都会认真听。"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <input type="text" id="chat-input" placeholder="分享你的感受...">
+                    <button id="send-message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 疗愈寄语卡片模态框 -->
+    <div class="card-modal" id="card-modal">
+        <div class="card-container">
+            <div class="healing-card">
+                <div class="card-header">
+                    <i class="fas fa-magic"></i>
+                    <span>Aurora</span>
+                </div>
+                <div class="card-content">
+                    <p id="healing-message">孤独并不代表你不重要，它只是提醒你需要被温柔对待。</p>
+                </div>
+                <div class="card-footer">
+                    <button class="share-card" id="share-card">
+                        <i class="fas fa-share"></i>
+                        分享到朋友圈
+                    </button>
+                </div>
+            </div>
+            <button class="close-card" id="close-card">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

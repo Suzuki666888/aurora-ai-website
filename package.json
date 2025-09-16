@@ -1,0 +1,22 @@
+{
+  "name": "aurora-healing-ai",
+  "version": "1.0.0",
+  "description": "Aurora - 世界上第一个由大二学生独立打造的情感疗愈AI",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": ["AI", "情感疗愈", "心理学", "人工智能"],
+  "author": "Aurora Creator",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "three": "^0.158.0",
+    "gsap": "^3.12.2",
+    "lottie-web": "^5.12.2"
+  }
+}
