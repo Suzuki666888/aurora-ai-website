@@ -5,15 +5,52 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #0a0a0a;
-    color: #ffffff;
-    overflow-x: hidden;
-    line-height: 1.6;
+:root {
+    /* 星空下的心灵绿洲配色方案 */
+    --deep-space: #0A0E17;
+    --nebula-purple: #1A1F3B;
+    --star-white: #FFFFFF;
+    --cosmic-gray: #E0E0E0;
+    
+    /* 情感光谱 */
+    --joy-amber: #FFD700;
+    --calm-blue: #4FC3F7;
+    --anxiety-magenta: #FF2A6D;
+    --healing-teal: #50E3C2;
+    --love-pink: #FF6B9D;
+    --peace-lavender: #9B59B6;
+    
+    /* 渐变组合 */
+    --cosmic-gradient: linear-gradient(135deg, var(--deep-space) 0%, var(--nebula-purple) 50%, #2C1810 100%);
+    --emotion-gradient: linear-gradient(45deg, var(--joy-amber), var(--healing-teal), var(--calm-blue));
+    --glass-gradient: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
 }
 
-/* 极光背景动画 */
+body {
+    font-family: 'Inter', 'Circular STD', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--deep-space);
+    color: var(--star-white);
+    overflow-x: hidden;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+/* 未来感标题字体 */
+.futuristic-title {
+    font-family: 'Orbitron', 'Expose', 'Poppins', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* 情感化字体 */
+.emotional-text {
+    font-family: 'Inter', 'Circular STD', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+/* 3D星云背景动画 */
 #aurora-bg {
     position: fixed;
     top: 0;
@@ -21,47 +58,95 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
-    animation: auroraShift 20s ease-in-out infinite;
+    background: var(--cosmic-gradient);
+    animation: cosmicShift 25s ease-in-out infinite;
 }
 
-@keyframes auroraShift {
+@keyframes cosmicShift {
     0%, 100% {
-        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+        background: linear-gradient(135deg, var(--deep-space) 0%, var(--nebula-purple) 50%, #2C1810 100%);
     }
     25% {
-        background: linear-gradient(135deg, #0a0a0a 0%, #2d1b69 25%, #11998e 50%, #38ef7d 75%, #533483 100%);
+        background: linear-gradient(135deg, var(--deep-space) 0%, #1A1F3B 25%, #2D1B69 50%, #4A148C 75%, #6A1B9A 100%);
     }
     50% {
-        background: linear-gradient(135deg, #0a0a0a 0%, #667eea 25%, #764ba2 50%, #f093fb 75%, #f5576c 100%);
+        background: linear-gradient(135deg, var(--deep-space) 0%, #0D47A1 25%, #1565C0 50%, #1976D2 75%, #1E88E5 100%);
     }
     75% {
-        background: linear-gradient(135deg, #0a0a0a 0%, #4facfe 25%, #00f2fe 50%, #43e97b 75%, #38f9d7 100%);
+        background: linear-gradient(135deg, var(--deep-space) 0%, #004D40 25%, #00695C 50%, #00796B 75%, #00897B 100%);
     }
 }
 
-/* 极光粒子效果 */
-#aurora-bg::before {
-    content: '';
-    position: absolute;
+/* 3D星云效果 */
+.nebula-3d {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
-    animation: auroraParticles 15s ease-in-out infinite;
+    z-index: -1;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(80, 227, 194, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 42, 109, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(79, 195, 247, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 60% 60%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+    animation: nebulaFloat 30s ease-in-out infinite;
 }
 
-@keyframes auroraParticles {
+@keyframes nebulaFloat {
     0%, 100% {
+        transform: translateX(0px) translateY(0px) rotate(0deg);
         opacity: 0.3;
-        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateX(-20px) translateY(-10px) rotate(1deg);
+        opacity: 0.5;
     }
     50% {
+        transform: translateX(10px) translateY(-20px) rotate(-1deg);
+        opacity: 0.4;
+    }
+    75% {
+        transform: translateX(-10px) translateY(10px) rotate(0.5deg);
         opacity: 0.6;
-        transform: translateY(-20px) rotate(180deg);
+    }
+}
+
+/* 粒子系统容器 */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 动态粒子 */
+.aurora-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particleFloat 15s linear infinite;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100vh) translateX(0px) rotate(0deg) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(90vh) translateX(10px) rotate(36deg) scale(1);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(10vh) translateX(-10px) rotate(324deg) scale(1);
+    }
+    100% {
+        transform: translateY(-10vh) translateX(0px) rotate(360deg) scale(0);
+        opacity: 0;
     }
 }
 
@@ -130,7 +215,7 @@ body {
     width: 100%;
 }
 
-/* 主视觉区域 */
+/* 主视觉区域 - 宇宙的呼唤 */
 .hero-section {
     min-height: 100vh;
     display: flex;
@@ -138,73 +223,249 @@ body {
     justify-content: center;
     padding: 120px 40px 80px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-content {
-    max-width: 800px;
-    animation: fadeInUp 1s ease-out;
+    max-width: 900px;
+    animation: cosmicFadeIn 2s ease-out;
+    position: relative;
+    z-index: 2;
 }
 
-@keyframes fadeInUp {
+@keyframes cosmicFadeIn {
     from {
         opacity: 0;
-        transform: translateY(50px);
+        transform: translateY(100px) scale(0.8);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(102, 126, 234, 0.1);
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 30px;
-    backdrop-filter: blur(10px);
+/* Aurora Logo - 神经元设计 */
+.aurora-logo {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
 }
 
-.hero-badge i {
-    color: #667eea;
+.logo-neural {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    animation: neuralPulse 3s ease-in-out infinite;
 }
 
+.neural-node {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, var(--healing-teal) 0%, var(--calm-blue) 100%);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 
+        0 0 30px var(--healing-teal),
+        0 0 60px rgba(80, 227, 194, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
+    animation: nodeGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes neuralPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes nodeGlow {
+    0% {
+        box-shadow: 
+            0 0 30px var(--healing-teal),
+            0 0 60px rgba(80, 227, 194, 0.3),
+            inset 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    100% {
+        box-shadow: 
+            0 0 50px var(--healing-teal),
+            0 0 100px rgba(80, 227, 194, 0.5),
+            inset 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+}
+
+.neural-connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.connection {
+    position: absolute;
+    background: linear-gradient(45deg, var(--healing-teal), var(--calm-blue));
+    border-radius: 2px;
+    animation: connectionFlow 2s ease-in-out infinite;
+}
+
+.connection-1 {
+    width: 40px;
+    height: 2px;
+    top: 20px;
+    left: 20px;
+    transform: rotate(45deg);
+    animation-delay: 0s;
+}
+
+.connection-2 {
+    width: 50px;
+    height: 2px;
+    top: 60px;
+    right: 20px;
+    transform: rotate(-45deg);
+    animation-delay: 0.5s;
+}
+
+.connection-3 {
+    width: 35px;
+    height: 2px;
+    bottom: 20px;
+    left: 30px;
+    transform: rotate(135deg);
+    animation-delay: 1s;
+}
+
+@keyframes connectionFlow {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* 主标题 - 打字机效果 */
 .hero-title {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .title-main {
     display: block;
-    font-size: 72px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    font-size: 64px;
+    font-weight: 300;
+    background: var(--emotion-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 20px;
-    animation: titleGlow 3s ease-in-out infinite;
+    animation: titleGlow 4s ease-in-out infinite;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
 @keyframes titleGlow {
     0%, 100% {
-        filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
+        filter: drop-shadow(0 0 30px rgba(80, 227, 194, 0.5));
+        text-shadow: 0 0 20px rgba(80, 227, 194, 0.3);
     }
     50% {
-        filter: drop-shadow(0 0 40px rgba(102, 126, 234, 0.8));
+        filter: drop-shadow(0 0 50px rgba(80, 227, 194, 0.8));
+        text-shadow: 0 0 40px rgba(80, 227, 194, 0.6);
     }
 }
 
 .title-sub {
     display: block;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
-    color: #e0e0e0;
-    line-height: 1.4;
+    color: var(--cosmic-gray);
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+}
+
+/* 情感光谱展示 */
+.emotion-spectrum {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.spectrum-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 15px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.spectrum-item:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.emotion-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: relative;
+    animation: emotionPulse 2s ease-in-out infinite;
+}
+
+.joy-dot {
+    background: var(--joy-amber);
+    box-shadow: 0 0 20px var(--joy-amber);
+}
+
+.calm-dot {
+    background: var(--calm-blue);
+    box-shadow: 0 0 20px var(--calm-blue);
+}
+
+.healing-dot {
+    background: var(--healing-teal);
+    box-shadow: 0 0 20px var(--healing-teal);
+}
+
+.love-dot {
+    background: var(--love-pink);
+    box-shadow: 0 0 20px var(--love-pink);
+}
+
+@keyframes emotionPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+.spectrum-item span {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cosmic-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .hero-description {
@@ -229,46 +490,378 @@ body {
     }
 }
 
-/* CTA按钮 */
-.cta-button {
+/* 宇宙级CTA按钮 - 玻璃质感 */
+.cosmic-cta-button {
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    justify-content: center;
+    background: none;
     border: none;
-    padding: 18px 36px;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    margin-top: 20px;
+}
+
+.button-glass {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--glass-gradient);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 20px 40px;
+    border-radius: 50px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    transition: all 0.4s ease;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+.cosmic-cta-button:hover .button-glass {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 50px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(80, 227, 194, 0.5);
 }
 
-.cta-button:active {
-    transform: translateY(-1px);
-}
-
-.button-glow {
+.button-glow-flow {
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(80, 227, 194, 0.3), 
+        rgba(79, 195, 247, 0.3),
+        rgba(255, 215, 0, 0.3),
+        transparent
+    );
+    transition: left 0.8s ease;
 }
 
-.cta-button:hover .button-glow {
+.cosmic-cta-button:hover .button-glow-flow {
     left: 100%;
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--star-white);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    z-index: 2;
+    position: relative;
+}
+
+.button-content i {
+    font-size: 20px;
+    color: var(--healing-teal);
+    animation: iconFloat 2s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.button-halo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, 
+        rgba(80, 227, 194, 0.1) 0%, 
+        rgba(79, 195, 247, 0.05) 50%, 
+        transparent 70%
+    );
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.4s ease;
+    animation: haloPulse 3s ease-in-out infinite;
+}
+
+.cosmic-cta-button:hover .button-halo {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+@keyframes haloPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.6;
+    }
+}
+
+/* 情绪星球交互区域 */
+.emotion-planet-section {
+    padding: 120px 40px;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+}
+
+.planet-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 80px;
+    position: relative;
+}
+
+/* 3D情绪星球 */
+.emotion-planet {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    animation: planetRotate 20s linear infinite;
+}
+
+.planet-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, 
+        var(--deep-space) 0%, 
+        var(--nebula-purple) 50%, 
+        var(--healing-teal) 100%
+    );
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 
+        0 0 50px var(--healing-teal),
+        inset 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.emotion-layers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.emotion-layer {
+    position: absolute;
+    border-radius: 50%;
+    animation: layerFloat 8s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+.layer-joy {
+    width: 300px;
+    height: 300px;
+    top: 50px;
+    left: 50px;
+    background: radial-gradient(circle, 
+        transparent 60%, 
+        var(--joy-amber) 80%, 
+        transparent 100%
+    );
+    animation-delay: 0s;
+}
+
+.layer-calm {
+    width: 350px;
+    height: 350px;
+    top: 25px;
+    left: 25px;
+    background: radial-gradient(circle, 
+        transparent 60%, 
+        var(--calm-blue) 80%, 
+        transparent 100%
+    );
+    animation-delay: 2s;
+}
+
+.layer-healing {
+    width: 320px;
+    height: 320px;
+    top: 40px;
+    left: 40px;
+    background: radial-gradient(circle, 
+        transparent 60%, 
+        var(--healing-teal) 80%, 
+        transparent 100%
+    );
+    animation-delay: 4s;
+}
+
+.layer-love {
+    width: 280px;
+    height: 280px;
+    top: 60px;
+    left: 60px;
+    background: radial-gradient(circle, 
+        transparent 60%, 
+        var(--love-pink) 80%, 
+        transparent 100%
+    );
+    animation-delay: 6s;
+}
+
+@keyframes planetRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes layerFloat {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.1) rotate(180deg);
+        opacity: 0.8;
+    }
+}
+
+.planet-rings {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ring {
+    position: absolute;
+    border: 2px solid;
+    border-radius: 50%;
+    animation: ringRotate 15s linear infinite;
+}
+
+.ring-1 {
+    width: 450px;
+    height: 450px;
+    top: -25px;
+    left: -25px;
+    border-color: var(--healing-teal);
+    opacity: 0.3;
+    animation-delay: 0s;
+}
+
+.ring-2 {
+    width: 500px;
+    height: 500px;
+    top: -50px;
+    left: -50px;
+    border-color: var(--calm-blue);
+    opacity: 0.2;
+    animation-delay: 5s;
+}
+
+.ring-3 {
+    width: 550px;
+    height: 550px;
+    top: -75px;
+    left: -75px;
+    border-color: var(--joy-amber);
+    opacity: 0.1;
+    animation-delay: 10s;
+}
+
+@keyframes ringRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 环绕文字 */
+.planet-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.text-orbit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: textOrbit 25s linear infinite;
+}
+
+.orbit-1 {
+    animation-delay: 0s;
+}
+
+.orbit-2 {
+    animation-delay: 8s;
+}
+
+.orbit-3 {
+    animation-delay: 16s;
+}
+
+.orbit-text {
+    position: absolute;
+    color: var(--cosmic-gray);
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.orbit-1 .orbit-text {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.orbit-2 .orbit-text {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.orbit-3 .orbit-text {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+}
+
+@keyframes textOrbit {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* 社会证明模块 */

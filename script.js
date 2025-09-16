@@ -1,8 +1,17 @@
-// Aurora 情感疗愈AI - 主要交互逻辑
+// Aurora 情感疗愈AI - 星空下的心灵绿洲
 class AuroraAI {
     constructor() {
         this.chatCount = 0;
         this.isFirstInteraction = true;
+        this.currentEmotion = 'neutral';
+        this.particles = [];
+        this.emotionData = {
+            joy: 0,
+            calm: 0,
+            anxiety: 0,
+            healing: 0
+        };
+        
         this.healingMessages = [
             "孤独并不代表你不重要，它只是提醒你需要被温柔对待。",
             "每一个情绪都是真实的，值得被理解和接纳。",
@@ -69,81 +78,108 @@ class AuroraAI {
     }
 
     createAuroraParticles() {
-        const auroraBg = document.getElementById('aurora-bg');
+        const particlesContainer = document.getElementById('particles-container');
         
-        // 创建粒子效果
-        for (let i = 0; i < 50; i++) {
+        // 创建动态粒子系统
+        for (let i = 0; i < 100; i++) {
             const particle = document.createElement('div');
             particle.className = 'aurora-particle';
+            
+            // 随机选择情感色彩
+            const colors = [
+                'rgba(80, 227, 194, 0.6)',   // 疗愈青绿
+                'rgba(79, 195, 247, 0.5)',   // 平静蓝
+                'rgba(255, 215, 0, 0.4)',    // 喜悦金
+                'rgba(255, 42, 109, 0.3)',   // 焦虑洋红
+                'rgba(255, 107, 157, 0.4)'   // 爱意粉
+            ];
+            
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const size = Math.random() * 3 + 1;
+            const duration = Math.random() * 15 + 10;
+            const delay = Math.random() * 10;
+            
             particle.style.cssText = `
                 position: absolute;
-                width: ${Math.random() * 4 + 1}px;
-                height: ${Math.random() * 4 + 1}px;
-                background: rgba(102, 126, 234, ${Math.random() * 0.5 + 0.2});
+                width: ${size}px;
+                height: ${size}px;
+                background: ${color};
                 border-radius: 50%;
                 left: ${Math.random() * 100}%;
                 top: ${Math.random() * 100}%;
-                animation: particleFloat ${Math.random() * 10 + 10}s linear infinite;
-                animation-delay: ${Math.random() * 5}s;
+                animation: particleFloat ${duration}s linear infinite;
+                animation-delay: ${delay}s;
+                box-shadow: 0 0 ${size * 2}px ${color};
             `;
-            auroraBg.appendChild(particle);
+            
+            particlesContainer.appendChild(particle);
+            this.particles.push(particle);
         }
-
-        // 添加粒子动画CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes particleFloat {
-                0% {
-                    transform: translateY(100vh) translateX(0px) rotate(0deg);
-                    opacity: 0;
-                }
-                10% {
-                    opacity: 1;
-                }
-                90% {
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(-100px) translateX(${Math.random() * 200 - 100}px) rotate(360deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
+        
+        // 添加鼠标交互效果
+        document.addEventListener('mousemove', (e) => {
+            this.updateParticlesOnMouseMove(e);
+        });
+    }
+    
+    updateParticlesOnMouseMove(e) {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        this.particles.forEach((particle, index) => {
+            const speed = 0.5 + (index % 3) * 0.2; // 不同粒子不同速度
+            const offsetX = (mouseX - 0.5) * 20 * speed;
+            const offsetY = (mouseY - 0.5) * 20 * speed;
+            
+            particle.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        });
     }
 
     animateElements() {
+        // 启动打字机效果
+        this.startTypewriterEffect();
+        
         // 使用GSAP进行高级动画
         if (typeof gsap !== 'undefined') {
-            // 标题动画
-            gsap.from('.title-main', {
-                duration: 1.5,
-                y: 100,
+            // 神经元Logo动画
+            gsap.from('.logo-neural', {
+                duration: 2,
+                scale: 0,
+                rotation: 180,
                 opacity: 0,
-                ease: 'power3.out'
+                ease: 'back.out(1.7)'
             });
 
-            // 描述文字动画
-            gsap.from('.hero-description p', {
+            // 情感光谱动画
+            gsap.from('.spectrum-item', {
                 duration: 1,
                 y: 50,
                 opacity: 0,
                 stagger: 0.2,
-                delay: 0.5,
+                delay: 1,
                 ease: 'power2.out'
             });
 
-            // 按钮动画
-            gsap.from('.cta-button', {
-                duration: 1,
+            // 宇宙级按钮动画
+            gsap.from('.cosmic-cta-button', {
+                duration: 1.5,
                 scale: 0,
                 opacity: 0,
-                delay: 1,
+                delay: 1.5,
                 ease: 'back.out(1.7)'
             });
 
+            // 情绪星球动画
+            gsap.from('.emotion-planet', {
+                duration: 2,
+                x: 200,
+                opacity: 0,
+                delay: 0.5,
+                ease: 'power3.out'
+            });
+
             // 卡片悬停效果
-            document.querySelectorAll('.proof-card, .testimonial-card').forEach(card => {
+            document.querySelectorAll('.cosmic-card').forEach(card => {
                 card.addEventListener('mouseenter', () => {
                     gsap.to(card, {
                         duration: 0.3,
@@ -161,6 +197,84 @@ class AuroraAI {
                         ease: 'power2.out'
                     });
                 });
+            });
+        }
+    }
+    
+    startTypewriterEffect() {
+        const titleElement = document.getElementById('typewriter-title');
+        if (!titleElement) return;
+        
+        const text = titleElement.textContent;
+        titleElement.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                titleElement.textContent += text.charAt(i);
+                i++;
+                
+                // 添加光粒飞溅效果
+                if (i % 3 === 0) {
+                    this.createLightParticle(titleElement);
+                }
+                
+                setTimeout(typeWriter, 100);
+            }
+        };
+        
+        setTimeout(typeWriter, 1000);
+    }
+    
+    createLightParticle(element) {
+        const rect = element.getBoundingClientRect();
+        const particle = document.createElement('div');
+        
+        particle.style.cssText = `
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--healing-teal);
+            border-radius: 50%;
+            left: ${rect.left + Math.random() * rect.width}px;
+            top: ${rect.top + Math.random() * rect.height}px;
+            pointer-events: none;
+            z-index: 1000;
+            animation: lightParticleFloat 1s ease-out forwards;
+        `;
+        
+        document.body.appendChild(particle);
+        
+        setTimeout(() => {
+            particle.remove();
+        }, 1000);
+    }
+    
+    updateEmotionIndicator(emotion) {
+        const indicator = document.getElementById('emotion-indicator');
+        if (!indicator) return;
+        
+        this.currentEmotion = emotion;
+        
+        // 更新指示器位置和颜色
+        const positions = {
+            'anxiety': '0%',
+            'neutral': '50%',
+            'joy': '100%'
+        };
+        
+        const colors = {
+            'anxiety': 'var(--anxiety-magenta)',
+            'neutral': 'var(--calm-blue)',
+            'joy': 'var(--joy-amber)'
+        };
+        
+        if (typeof gsap !== 'undefined') {
+            gsap.to(indicator, {
+                duration: 0.5,
+                left: positions[emotion] || positions['neutral'],
+                backgroundColor: colors[emotion] || colors['neutral'],
+                ease: 'power2.out'
             });
         }
     }
@@ -366,6 +480,140 @@ class AuroraAI {
         }
     }
 }
+
+// 添加动态CSS动画
+const dynamicStyles = document.createElement('style');
+dynamicStyles.textContent = `
+    @keyframes lightParticleFloat {
+        0% {
+            opacity: 1;
+            transform: translateY(0px) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-50px) scale(0);
+        }
+    }
+    
+    .emotion-status-bar {
+        position: relative;
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+    
+    .status-track {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+            var(--anxiety-magenta) 0%, 
+            var(--calm-blue) 50%, 
+            var(--joy-amber) 100%
+        );
+        border-radius: 2px;
+    }
+    
+    .emotion-indicator {
+        position: absolute;
+        top: -6px;
+        width: 16px;
+        height: 16px;
+        background: var(--calm-blue);
+        border-radius: 50%;
+        border: 2px solid var(--star-white);
+        box-shadow: 0 0 10px var(--calm-blue);
+        transition: all 0.3s ease;
+    }
+    
+    .emotion-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--cosmic-gray);
+    }
+    
+    .chat-starry-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: -1;
+    }
+    
+    .stars {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+            radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+            radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+            radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+            radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+        background-repeat: repeat;
+        background-size: 200px 100px;
+        animation: starTwinkle 3s ease-in-out infinite;
+    }
+    
+    @keyframes starTwinkle {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+    }
+    
+    .shooting-stars {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .shooting-stars::before,
+    .shooting-stars::after {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: linear-gradient(45deg, transparent, #fff, transparent);
+        border-radius: 50%;
+        animation: shootingStar 3s linear infinite;
+    }
+    
+    .shooting-stars::before {
+        top: 20%;
+        left: -10px;
+        animation-delay: 0s;
+    }
+    
+    .shooting-stars::after {
+        top: 60%;
+        left: -10px;
+        animation-delay: 1.5s;
+    }
+    
+    @keyframes shootingStar {
+        0% {
+            transform: translateX(0) translateY(0);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(100vw) translateY(100px);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(dynamicStyles);
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', () => {

@@ -7,6 +7,8 @@
     <meta name="description" content="Aurora：世界上第一个由大二学生独立打造的情感疗愈AI。不只是回答问题，而是倾听、陪伴、疗愈。">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -28,73 +30,203 @@
             </div>
         </nav>
 
-        <!-- 主视觉区域 -->
+        <!-- 主视觉区域 - 宇宙的呼唤 -->
         <section class="hero-section">
+            <!-- 3D星云背景 -->
+            <div class="nebula-3d" id="nebula-3d"></div>
+            
+            <!-- 粒子系统 -->
+            <div class="particles-container" id="particles-container"></div>
+            
             <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-star"></i>
-                    <span>世界上第一个由大二学生独立打造的情感疗愈AI</span>
+                <!-- Aurora Logo -->
+                <div class="aurora-logo">
+                    <div class="logo-neural">
+                        <div class="neural-node"></div>
+                        <div class="neural-connections">
+                            <div class="connection connection-1"></div>
+                            <div class="connection connection-2"></div>
+                            <div class="connection connection-3"></div>
+                        </div>
+                    </div>
                 </div>
                 
+                <!-- 主标题 - 打字机效果 -->
                 <h1 class="hero-title">
-                    <span class="title-main">Aurora</span>
-                    <span class="title-sub">不只是回答问题，而是倾听、陪伴、疗愈</span>
+                    <span class="title-main futuristic-title" id="typewriter-title">Aurora: Your Emotional Cosmos</span>
+                    <span class="title-sub emotional-text">Navigate Your Inner Universe with AI</span>
                 </h1>
                 
-                <div class="hero-description">
-                    <p>ChatGPT 会回答问题，Aurora 会理解你。</p>
-                    <p>随时随地，一个永不疲惫的倾听者。</p>
-                    <p>融合心理学与人工智能，为孤独与心碎提供安全的陪伴。</p>
+                <!-- 情感光谱展示 -->
+                <div class="emotion-spectrum">
+                    <div class="spectrum-item" data-emotion="joy">
+                        <div class="emotion-dot joy-dot"></div>
+                        <span>Joy</span>
+                    </div>
+                    <div class="spectrum-item" data-emotion="calm">
+                        <div class="emotion-dot calm-dot"></div>
+                        <span>Calm</span>
+                    </div>
+                    <div class="spectrum-item" data-emotion="healing">
+                        <div class="emotion-dot healing-dot"></div>
+                        <span>Healing</span>
+                    </div>
+                    <div class="spectrum-item" data-emotion="love">
+                        <div class="emotion-dot love-dot"></div>
+                        <span>Love</span>
+                    </div>
                 </div>
                 
-                <button class="cta-button" id="start-chat">
-                    <i class="fas fa-comments"></i>
-                    <span>立即对话</span>
-                    <div class="button-glow"></div>
+                <!-- 核心CTA按钮 - 玻璃质感 -->
+                <button class="cosmic-cta-button" id="start-chat">
+                    <div class="button-glass">
+                        <div class="button-glow-flow"></div>
+                        <div class="button-content">
+                            <i class="fas fa-rocket"></i>
+                            <span>Begin Your Journey</span>
+                        </div>
+                    </div>
+                    <div class="button-halo"></div>
                 </button>
             </div>
         </section>
 
-        <!-- 社会证明模块 -->
-        <section class="proof-section" id="about">
+        <!-- 情绪星球交互区域 -->
+        <section class="emotion-planet-section" id="about">
+            <div class="planet-container">
+                <!-- 3D情绪星球 -->
+                <div class="emotion-planet" id="emotion-planet">
+                    <div class="planet-core"></div>
+                    <div class="emotion-layers">
+                        <div class="emotion-layer layer-joy"></div>
+                        <div class="emotion-layer layer-calm"></div>
+                        <div class="emotion-layer layer-healing"></div>
+                        <div class="emotion-layer layer-love"></div>
+                    </div>
+                    <div class="planet-rings">
+                        <div class="ring ring-1"></div>
+                        <div class="ring ring-2"></div>
+                        <div class="ring ring-3"></div>
+                    </div>
+                </div>
+                
+                <!-- 环绕文字 -->
+                <div class="planet-text">
+                    <div class="text-orbit orbit-1">
+                        <span class="orbit-text">理解你的快乐</span>
+                    </div>
+                    <div class="text-orbit orbit-2">
+                        <span class="orbit-text">安抚你的焦虑</span>
+                    </div>
+                    <div class="text-orbit orbit-3">
+                        <span class="orbit-text">疗愈你的心灵</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社会证明模块 - 重新设计 -->
+        <section class="proof-section">
             <div class="container">
-                <h2 class="section-title">为什么 Aurora 与众不同？</h2>
+                <h2 class="section-title futuristic-title">为什么 Aurora 与众不同？</h2>
                 
                 <div class="proof-grid">
-                    <div class="proof-card">
+                    <div class="proof-card cosmic-card">
+                        <div class="card-glow"></div>
                         <div class="proof-icon">
                             <i class="fas fa-user-graduate"></i>
                         </div>
                         <h3>独立创造</h3>
                         <p>由一名20岁的大二学生独立研发，跨越技术、心理学与伦理。</p>
+                        <div class="card-particles"></div>
                     </div>
                     
-                    <div class="proof-card">
+                    <div class="proof-card cosmic-card">
+                        <div class="card-glow"></div>
                         <div class="proof-icon">
                             <i class="fas fa-globe"></i>
                         </div>
                         <h3>全球影响</h3>
                         <p>数百人测试，反馈 Aurora 让他们"感觉终于有人理解自己"。</p>
+                        <div class="card-particles"></div>
                     </div>
                     
-                    <div class="proof-card">
+                    <div class="proof-card cosmic-card">
+                        <div class="card-glow"></div>
                         <div class="proof-icon">
                             <i class="fas fa-rocket"></i>
                         </div>
                         <h3>未来实验</h3>
                         <p>Aurora 不是玩具，而是一场关于 AI 如何真正疗愈人心的探索。</p>
+                        <div class="card-particles"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 用户反馈模块 -->
+        <!-- 全球情绪地图 - 世界的脉搏 -->
+        <section class="global-emotion-map" id="emotion-map">
+            <div class="map-container">
+                <h2 class="section-title futuristic-title">世界的脉搏</h2>
+                
+                <!-- 3D地球容器 -->
+                <div class="earth-container" id="earth-container">
+                    <div class="earth-globe" id="earth-globe">
+                        <div class="earth-surface"></div>
+                        <div class="emotion-ripples" id="emotion-ripples"></div>
+                    </div>
+                </div>
+                
+                <!-- 控制面板 -->
+                <div class="map-controls">
+                    <div class="time-slider-container">
+                        <label>时间轴</label>
+                        <input type="range" class="time-slider" id="time-slider" min="0" max="24" value="12">
+                        <span class="time-display" id="time-display">12:00</span>
+                    </div>
+                    
+                    <div class="emotion-filters">
+                        <label>情绪过滤器</label>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-emotion="all">全部</button>
+                            <button class="filter-btn" data-emotion="joy">喜悦</button>
+                            <button class="filter-btn" data-emotion="calm">平静</button>
+                            <button class="filter-btn" data-emotion="anxiety">焦虑</button>
+                            <button class="filter-btn" data-emotion="healing">疗愈</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 实时统计 -->
+                <div class="emotion-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="joy-count">0</div>
+                        <div class="stat-label">喜悦</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="calm-count">0</div>
+                        <div class="stat-label">平静</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="anxiety-count">0</div>
+                        <div class="stat-label">焦虑</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="healing-count">0</div>
+                        <div class="stat-label">疗愈</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 用户反馈模块 - 重新设计 -->
         <section class="testimonials-section" id="testimonials">
             <div class="container">
-                <h2 class="section-title">用户真实反馈</h2>
+                <h2 class="section-title futuristic-title">用户真实反馈</h2>
                 
                 <div class="testimonials-grid">
-                    <div class="testimonial-card">
+                    <div class="testimonial-card cosmic-card">
+                        <div class="card-glow"></div>
                         <div class="testimonial-content">
                             <p>"Aurora让我感觉终于有人理解自己，那种被倾听的感觉真的很治愈。"</p>
                         </div>
@@ -105,9 +237,11 @@
                                 <span class="author-title">大学生</span>
                             </div>
                         </div>
+                        <div class="card-particles"></div>
                     </div>
                     
-                    <div class="testimonial-card">
+                    <div class="testimonial-card cosmic-card">
+                        <div class="card-glow"></div>
                         <div class="testimonial-content">
                             <p>"作为一个内向的人，Aurora给了我一个安全的空间来表达情感。"</p>
                         </div>
@@ -118,9 +252,11 @@
                                 <span class="author-title">程序员</span>
                             </div>
                         </div>
+                        <div class="card-particles"></div>
                     </div>
                     
-                    <div class="testimonial-card">
+                    <div class="testimonial-card cosmic-card">
+                        <div class="card-glow"></div>
                         <div class="testimonial-content">
                             <p>"Aurora的寄语卡片让我在朋友圈分享后，很多朋友都来问我这是什么。"</p>
                         </div>
@@ -131,17 +267,37 @@
                                 <span class="author-title">设计师</span>
                             </div>
                         </div>
+                        <div class="card-particles"></div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- 对话界面模态框 -->
+    <!-- 沉浸式对话界面 - 与Aurora对话 -->
     <div class="chat-modal" id="chat-modal">
+        <!-- 全黑星空背景 -->
+        <div class="chat-starry-bg">
+            <div class="stars"></div>
+            <div class="shooting-stars"></div>
+        </div>
+        
         <div class="chat-container">
+            <!-- 情绪状态条 -->
+            <div class="emotion-status-bar">
+                <div class="status-track">
+                    <div class="emotion-indicator" id="emotion-indicator"></div>
+                </div>
+                <div class="emotion-labels">
+                    <span>焦虑</span>
+                    <span>平静</span>
+                    <span>喜悦</span>
+                </div>
+            </div>
+            
             <div class="chat-header">
                 <div class="chat-avatar">
+                    <div class="avatar-glow"></div>
                     <i class="fas fa-magic"></i>
                 </div>
                 <div class="chat-info">
@@ -153,12 +309,15 @@
                 </button>
             </div>
             
+            <!-- 悬浮玻璃器皿对话窗口 -->
             <div class="chat-messages" id="chat-messages">
                 <div class="message aurora-message">
                     <div class="message-avatar">
+                        <div class="avatar-pulse"></div>
                         <i class="fas fa-magic"></i>
                     </div>
-                    <div class="message-content">
+                    <div class="message-content aurora-content">
+                        <div class="message-glow"></div>
                         <p>🌌 "嗨，我是 Aurora。不是来回答你的问题，而是想听你的感受。</p>
                         <p>今天过得怎么样？有没有什么心情想和我分享？无论开心还是难过，我都会认真听。"</p>
                     </div>
@@ -168,7 +327,8 @@
             <div class="chat-input-container">
                 <div class="chat-input-wrapper">
                     <input type="text" id="chat-input" placeholder="分享你的感受...">
-                    <button id="send-message">
+                    <button id="send-message" class="photon-send">
+                        <div class="photon-spiral"></div>
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
@@ -199,6 +359,47 @@
             </button>
         </div>
     </div>
+
+    <!-- 白皮书页面 - 智慧的结晶 -->
+    <section class="whitepaper-section" id="whitepaper">
+        <div class="whitepaper-container">
+            <h2 class="section-title futuristic-title">智慧的结晶</h2>
+            
+            <!-- 3D典籍容器 -->
+            <div class="holographic-book-container">
+                <div class="holographic-book" id="holographic-book">
+                    <div class="book-cover">
+                        <div class="cover-glow"></div>
+                        <div class="cover-title">Aurora</div>
+                        <div class="cover-subtitle">情感疗愈AI白皮书</div>
+                    </div>
+                    <div class="book-pages">
+                        <div class="page page-1"></div>
+                        <div class="page page-2"></div>
+                        <div class="page page-3"></div>
+                    </div>
+                    <div class="book-spine"></div>
+                </div>
+                
+                <!-- 下载光束效果 -->
+                <div class="download-beam" id="download-beam"></div>
+                <div class="progress-ring" id="progress-ring"></div>
+            </div>
+            
+            <!-- 下载按钮 -->
+            <button class="download-whitepaper" id="download-whitepaper">
+                <div class="download-glow"></div>
+                <i class="fas fa-download"></i>
+                <span>Download Whitepaper</span>
+            </button>
+            
+            <!-- 典籍描述 -->
+            <div class="book-description">
+                <p>探索Aurora背后的技术原理、心理学基础与伦理考量</p>
+                <p>深入了解情感疗愈AI的设计哲学与实现路径</p>
+            </div>
+        </div>
+    </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
