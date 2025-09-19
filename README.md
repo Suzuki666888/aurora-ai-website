@@ -105,7 +105,7 @@ Aurora还在成长，而你我，都正是黎明前最黑暗时——
 ## 🎮 快速体验
 
 ### 🌐 在线体验
-**立即体验**: [https://aurora-ai-website.vercel.app](https://aurora-ai-website.vercel.app)
+**立即体验**: [https://suzuki666888.github.io/aurora-ai-website/](https://suzuki666888.github.io/aurora-ai-website/)
 
 ### 🖥️ 本地部署
 
@@ -122,10 +122,6 @@ cd backend && npm install && npm run start:api-only
 python3 -m http.server 8080
 ```
 
-**访问地址**:
-- 🌐 前端: http://localhost:8080
-- 🔧 后端API: http://localhost:3000
-- 📚 API文档: http://localhost:3000/api-docs
 
 ### 👤 测试账户
 - **邮箱**: `test@aurora.ai`
@@ -406,9 +402,9 @@ copies or substantial portions of the Software.
 **技术栈**: JavaScript, Node.js, Python, 心理学, 机器学习
 
 **联系方式**: 
-- 📧 Email: [your-email@example.com]
-- 🐦 Twitter: [@your-twitter]
-- 💼 LinkedIn: [your-linkedin]
+- 📧 Email: [SimonQiu123@outlook.com]
+- 🐦 Twitter: [@Simon335939]
+- 💼 小红书: [11308138654]
 
 </div>
 
