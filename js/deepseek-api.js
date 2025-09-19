@@ -49,7 +49,7 @@ class DeepSeekAPI {
 
         // 对话历史管理
         this.conversationHistory = [];
-        this.maxHistoryLength = 10; // 保持最近10轮对话
+        this.maxHistoryLength = 15; // 保持最近10轮对话
         
         // 错误处理
         this.retryCount = 0;

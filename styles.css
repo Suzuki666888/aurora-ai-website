@@ -3945,6 +3945,27 @@ body {
     }
 }
 
+/* 移动端优化 */
+@media (max-width: 768px) {
+    /* 确保图片在移动端正确显示 */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* 优化触摸体验 */
+    * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+    
+    /* 优化滚动 */
+    body {
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+}
+
 /* 主页面响应式优化 */
 @media (max-width: 768px) {
     .navbar-ultra {
