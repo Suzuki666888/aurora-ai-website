@@ -360,6 +360,291 @@ class AuthManager {
             throw error;
         }
     }
+
+    // ==================== 用户数据管理功能 ====================
+
+    /**
+     * 获取用户数据
+     * @returns {Promise<Object>} 用户数据
+     */
+    async getUserData() {
+        try {
+            const response = await this.authenticatedFetch(`${this.apiBaseUrl}/user/data`);
+            const data = await response.json();
+            
+            if (data.success) {
+                // 保存到本地存储
+                localStorage.setItem('aurora_user_data', JSON.stringify(data.data));
+                return data.data;
+            } else {
+                throw new Error(data.message || '获取用户数据失败');
+            }
+        } catch (error) {
+            console.error('获取用户数据失败:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 保存用户数据
+     * @param {Object} data - 要保存的数据
+     * @returns {Promise<Object>} 保存结果
+     */
+    async saveUserData(data) {
+        try {
+            const response = await this.authenticatedFetch(`${this.apiBaseUrl}/user/data`, {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // 更新本地存储
+                const currentData = JSON.parse(localStorage.getItem('aurora_user_data') || '{}');
+                const updatedData = { ...currentData, ...data };
+                localStorage.setItem('aurora_user_data', JSON.stringify(updatedData));
+                
+                return result.data;
+            } else {
+                throw new Error(result.message || '保存用户数据失败');
+            }
+        } catch (error) {
+            console.error('保存用户数据失败:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 添加情感分析记录
+     * @param {Object} emotionData - 情感数据
+     * @returns {Promise<Object>} 保存结果
+     */
+    async addEmotionRecord(emotionData) {
+        try {
+            const response = await this.authenticatedFetch(`${this.apiBaseUrl}/user/emotion`, {
+                method: 'POST',
+                body: JSON.stringify(emotionData)
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // 更新本地存储
+                const currentData = JSON.parse(localStorage.getItem('aurora_user_data') || '{}');
+                if (!currentData.emotionHistory) currentData.emotionHistory = [];
+                currentData.emotionHistory.push(data.data.emotionRecord);
+                localStorage.setItem('aurora_user_data', JSON.stringify(currentData));
+                
+                return data.data;
+            } else {
+                throw new Error(data.message || '添加情感记录失败');
+            }
+        } catch (error) {
+            console.error('添加情感记录失败:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 添加对话会话
+     * @param {Object} sessionData - 会话数据
+     * @returns {Promise<Object>} 保存结果
+     */
+    async addChatSession(sessionData) {
+        try {
+            const response = await this.authenticatedFetch(`${this.apiBaseUrl}/user/chat`, {
+                method: 'POST',
+                body: JSON.stringify(sessionData)
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // 更新本地存储
+                const currentData = JSON.parse(localStorage.getItem('aurora_user_data') || '{}');
+                if (!currentData.chatSessions) currentData.chatSessions = [];
+                currentData.chatSessions.push(data.data.chatSession);
+                localStorage.setItem('aurora_user_data', JSON.stringify(currentData));
+                
+                return data.data;
+            } else {
+                throw new Error(data.message || '添加对话会话失败');
+            }
+        } catch (error) {
+            console.error('添加对话会话失败:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 更新用户偏好设置
+     * @param {Object} preferences - 偏好设置
+     * @returns {Promise<Object>} 更新结果
+     */
+    async updateUserPreferences(preferences) {
+        try {
+            const response = await this.authenticatedFetch(`${this.apiBaseUrl}/user/preferences`, {
+                method: 'PUT',
+                body: JSON.stringify(preferences)
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // 更新本地存储
+                const currentData = JSON.parse(localStorage.getItem('aurora_user_data') || '{}');
+                currentData.preferences = { ...currentData.preferences, ...preferences };
+                localStorage.setItem('aurora_user_data', JSON.stringify(currentData));
+                
+                return data.data;
+            } else {
+                throw new Error(data.message || '更新用户偏好设置失败');
+            }
+        } catch (error) {
+            console.error('更新用户偏好设置失败:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 更新用户隐私设置
+     * @param {Object} privacySettings - 隐私设置
+     * @returns {Promise<Object>} 更新结果
+     */
+    async updateUserPrivacySettings(privacySettings) {
+        try {
+            const response = await this.authenticatedFetch(`${this.apiBaseUrl}/user/privacy`, {
+                method: 'PUT',
+                body: JSON.stringify(privacySettings)
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // 更新本地存储
+                const currentData = JSON.parse(localStorage.getItem('aurora_user_data') || '{}');
+                currentData.privacySettings = { ...currentData.privacySettings, ...privacySettings };
+                localStorage.setItem('aurora_user_data', JSON.stringify(currentData));
+                
+                return data.data;
+            } else {
+                throw new Error(data.message || '更新用户隐私设置失败');
+            }
+        } catch (error) {
+            console.error('更新用户隐私设置失败:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 获取用户统计信息
+     * @returns {Promise<Object>} 统计信息
+     */
+    async getUserStats() {
+        try {
+            const response = await this.authenticatedFetch(`${this.apiBaseUrl}/user/stats`);
+            const data = await response.json();
+            
+            if (data.success) {
+                return data.data;
+            } else {
+                throw new Error(data.message || '获取用户统计信息失败');
+            }
+        } catch (error) {
+            console.error('获取用户统计信息失败:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 导出用户数据
+     * @returns {Promise<Object>} 导出的数据
+     */
+    async exportUserData() {
+        try {
+            const response = await this.authenticatedFetch(`${this.apiBaseUrl}/user/export`);
+            const data = await response.json();
+            
+            if (data.success) {
+                return data.data;
+            } else {
+                throw new Error(data.message || '导出用户数据失败');
+            }
+        } catch (error) {
+            console.error('导出用户数据失败:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 删除用户数据
+     * @returns {Promise<Object>} 删除结果
+     */
+    async deleteUserData() {
+        try {
+            const response = await this.authenticatedFetch(`${this.apiBaseUrl}/user/delete`, {
+                method: 'DELETE'
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // 清除本地存储
+                localStorage.removeItem('aurora_user_data');
+                this.logout();
+                
+                return data;
+            } else {
+                throw new Error(data.message || '删除用户数据失败');
+            }
+        } catch (error) {
+            console.error('删除用户数据失败:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 获取本地用户数据
+     * @returns {Object|null} 本地用户数据
+     */
+    getLocalUserData() {
+        try {
+            return JSON.parse(localStorage.getItem('aurora_user_data') || 'null');
+        } catch (error) {
+            console.error('获取本地用户数据失败:', error);
+            return null;
+        }
+    }
+
+    /**
+     * 同步用户数据
+     * @returns {Promise<Object>} 同步结果
+     */
+    async syncUserData() {
+        try {
+            const serverData = await this.getUserData();
+            const localData = this.getLocalUserData();
+            
+            if (localData && serverData.lastSync > localData.lastSync) {
+                // 服务器数据更新，使用服务器数据
+                localStorage.setItem('aurora_user_data', JSON.stringify(serverData));
+                return { source: 'server', data: serverData };
+            } else if (localData && localData.lastSync > serverData.lastSync) {
+                // 本地数据更新，同步到服务器
+                await this.saveUserData(localData);
+                return { source: 'local', data: localData };
+            } else {
+                // 数据一致
+                return { source: 'synced', data: serverData };
+            }
+        } catch (error) {
+            console.error('同步用户数据失败:', error);
+            // 如果服务器同步失败，返回本地数据
+            const localData = this.getLocalUserData();
+            return { source: 'local', data: localData };
+        }
+    }
 }
 
 // 创建全局实例

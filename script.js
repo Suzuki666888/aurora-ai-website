@@ -1456,8 +1456,8 @@ function showUserDropdown() {
             <span>开始对话</span>
         </div>
         <div class="dropdown-item" onclick="viewProfile()">
-            <i class="fas fa-user"></i>
-            <span>个人资料</span>
+            <i class="fas fa-tachometer-alt"></i>
+            <span>用户中心</span>
         </div>
         <div class="dropdown-item" onclick="logout()">
             <i class="fas fa-sign-out-alt"></i>
@@ -1503,7 +1503,7 @@ function goToDialogue() {
 
 // 查看个人资料
 function viewProfile() {
-    alert('个人资料功能即将推出！');
+    window.location.href = 'user-dashboard.html';
 }
 
 // 退出登录
