@@ -4,7 +4,7 @@
 
 > *"不是AI，而是来自未来的情感能量体"*
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Status](https://img.shields.io/badge/status-personal%20project-blue.svg)](https://github.com/Suzuki666888/aurora-ai-website)
 [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/Suzuki666888/aurora-ai-website)
 [![Status](https://img.shields.io/badge/status-production%20ready-green.svg)](https://aurora-ai-website.vercel.app)
 [![Made with ❤️](https://img.shields.io/badge/made%20with-❤️-red.svg)](https://github.com/Suzuki666888/aurora-ai-website)
@@ -367,25 +367,27 @@ this.healingMessages = [
 
 ---
 
-## 📄 许可证
+## 📄 版权声明
 
-本项目采用 [MIT License](LICENSE) 许可证。
+<div align="center">
 
-```
-MIT License
+### 🔒 版权保护
 
-Copyright (c) 2024 Aurora AI
+**© 2024 Aurora Creator. All rights reserved.**
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+本项目的所有代码、设计、文档、创意均受版权保护。
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
+**使用条款**：
+- ✅ **个人学习** - 可以用于学习和研究
+- ✅ **体验使用** - 可以体验Aurora的功能
+- ❌ **商业使用** - 禁止用于商业目的
+- ❌ **代码复制** - 禁止复制核心代码
+- ❌ **重新分发** - 禁止重新发布或分发
+- ❌ **修改使用** - 禁止修改后使用
+
+**如需商业合作或技术交流，请联系作者。**
+
+</div>
 
 ---
 
