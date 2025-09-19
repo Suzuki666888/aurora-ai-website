@@ -71,6 +71,30 @@ class DeepSeekAPI {
     isOnline() {
         return navigator.onLine;
     }
+    
+    // 尝试使用本地API服务器
+    async tryLocalAPI(userMessage) {
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userMessage })
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success) {
+                    this.displayResponse(data.response);
+                    return true;
+                }
+            }
+        } catch (error) {
+            console.log('本地API不可用，使用DeepSeek API');
+        }
+        return false;
+    }
 
     /**
      * 发送消息到DeepSeek API
@@ -86,6 +110,11 @@ class DeepSeekAPI {
             if (!this.isOnline() || !this.isApiKeyValid()) {
                 console.log('离线模式或API未配置，使用本地智能回复');
                 return this.getLocalIntelligentResponse(userMessage);
+            }
+            
+            // 尝试使用本地API服务器
+            if (await this.tryLocalAPI(userMessage)) {
+                return;
             }
 
             // 构建消息历史
