@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>直接测试DeepSeek API</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        .log { background: #000; color: #0f0; padding: 10px; font-family: monospace; height: 200px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 DeepSeek API 直接测试</h1>
+        
+        <div class="test-section">
+            <h3>1. 基础检查</h3>
+            <button onclick="basicCheck()">检查基础状态</button>
+            <div id="basicResult" class="result">未检查</div>
+        </div>
+        
+        <div class="test-section">
+            <h3>2. API调用测试</h3>
+            <input type="text" id="testMessage" value="你好，请介绍一下自己" style="width: 300px; padding: 8px;">
+            <button onclick="testAPICall()">测试API调用</button>
+            <div id="apiResult" class="result">未测试</div>
+        </div>
+        
+        <div class="test-section">
+            <h3>3. 本地回复测试</h3>
+            <input type="text" id="localMessage" value="我有点焦虑" style="width: 300px; padding: 8px;">
+            <button onclick="testLocalResponse()">测试本地回复</button>
+            <div id="localResult" class="result">未测试</div>
+        </div>
+        
+        <div class="test-section">
+            <h3>4. 控制台日志</h3>
+            <div id="consoleLog" class="log"></div>
+            <button onclick="clearLog()">清空日志</button>
+        </div>
+    </div>
+
+    <script src="js/deepseek-api.js"></script>
+    <script>
+        // 重写console.log来捕获日志
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        function logToDiv(message, type = 'log') {
+            const logDiv = document.getElementById('consoleLog');
+            const time = new Date().toLocaleTimeString();
+            const color = type === 'error' ? '#f00' : '#0f0';
+            logDiv.innerHTML += `<span style="color: ${color}">[${time}] ${message}</span><br>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            logToDiv(args.join(' '), 'log');
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            logToDiv(args.join(' '), 'error');
+        };
+        
+        function clearLog() {
+            document.getElementById('consoleLog').innerHTML = '';
+        }
+        
+        function setResult(elementId, message, type = '') {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `result ${type}`;
+        }
+        
+        function basicCheck() {
+            console.log('开始基础检查...');
+            
+            let results = [];
+            
+            // 检查DeepSeek API是否加载
+            if (typeof window.deepSeekAPI === 'undefined') {
+                results.push('❌ DeepSeek API未加载');
+                setResult('basicResult', 'DeepSeek API未加载', 'error');
+                return;
+            }
+            
+            results.push('✅ DeepSeek API已加载');
+            
+            // 检查API密钥
+            const apiKeyValid = window.deepSeekAPI.isApiKeyValid();
+            if (apiKeyValid) {
+                results.push('✅ API密钥有效');
+            } else {
+                results.push('❌ API密钥无效');
+            }
+            
+            // 检查网络状态
+            const online = window.deepSeekAPI.isOnline();
+            if (online) {
+                results.push('✅ 网络连接正常');
+            } else {
+                results.push('❌ 网络连接异常');
+            }
+            
+            // 检查API URL
+            console.log('API URL:', window.deepSeekAPI.apiUrl);
+            console.log('API Key:', window.deepSeekAPI.apiKey.substring(0, 10) + '...');
+            
+            const allGood = apiKeyValid && online;
+            setResult('basicResult', results.join('\n'), allGood ? 'success' : 'warning');
+        }
+        
+        async function testAPICall() {
+            const message = document.getElementById('testMessage').value;
+            console.log('开始测试API调用:', message);
+            
+            if (typeof window.deepSeekAPI === 'undefined') {
+                setResult('apiResult', 'DeepSeek API未加载', 'error');
+                return;
+            }
+            
+            try {
+                console.log('调用sendMessage方法...');
+                const response = await window.deepSeekAPI.sendMessage(message);
+                console.log('API调用成功，收到回复:', response);
+                setResult('apiResult', `✅ 成功: ${response}`, 'success');
+            } catch (error) {
+                console.error('API调用失败:', error);
+                setResult('apiResult', `❌ 失败: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testLocalResponse() {
+            const message = document.getElementById('localMessage').value;
+            console.log('开始测试本地回复:', message);
+            
+            if (typeof window.deepSeekAPI === 'undefined') {
+                setResult('localResult', 'DeepSeek API未加载', 'error');
+                return;
+            }
+            
+            try {
+                console.log('调用getLocalIntelligentResponse方法...');
+                const response = await window.deepSeekAPI.getLocalIntelligentResponse(message);
+                console.log('本地回复成功:', response);
+                setResult('localResult', `✅ 成功: ${response}`, 'success');
+            } catch (error) {
+                console.error('本地回复失败:', error);
+                setResult('localResult', `❌ 失败: ${error.message}`, 'error');
+            }
+        }
+        
+        // 页面加载时自动检查
+        window.onload = function() {
+            console.log('页面加载完成');
+            setTimeout(basicCheck, 1000);
+        };
+    </script>
+</body>
+</html>

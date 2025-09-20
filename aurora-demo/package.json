@@ -1,0 +1,33 @@
+{
+  "name": "aurora-demo",
+  "version": "2.0.0",
+  "description": "Aurora情感AI演示版本 - 前端展示",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "dev": "python3 -m http.server 8080",
+    "build": "echo 'Demo version - no build needed'",
+    "serve": "npx http-server -p 8080 -o"
+  },
+  "keywords": [
+    "aurora",
+    "emotion-ai",
+    "chatbot",
+    "healing",
+    "psychology",
+    "demo"
+  ],
+  "author": "Aurora Creator",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Suzuki666888/aurora-ai-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Suzuki666888/aurora-ai-website/issues"
+  },
+  "homepage": "https://suzuki666888.github.io/aurora-ai-website/",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

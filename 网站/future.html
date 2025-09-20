@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora未来展望 - 情感纪元</title>
+    <meta name="description" content="Aurora未来展望：情感纪元——迈向一个更智慧、更温暖、更互联的人类未来">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .future-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .future-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .future-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        
+        .future-subtitle {
+            font-size: 1.5rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 4rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .vision-container {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vision-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #fff;
+            position: relative;
+        }
+        
+        .vision-title::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 60%;
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            border-radius: 2px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 2rem 0 1rem 0;
+            color: #fff;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            border-radius: 1px;
+        }
+        
+        .future-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+        
+        .epoch-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #FF6B6B;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+        }
+        
+        .epoch-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .era-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .era-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .era-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+        }
+        
+        .era-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 107, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+        }
+        
+        .era-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #FF6B6B;
+            margin-bottom: 1rem;
+        }
+        
+        .era-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        .journey-box {
+            background: rgba(78, 205, 196, 0.1);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .journey-box::before {
+            content: '🌟';
+            position: absolute;
+            top: -1rem;
+            left: 2rem;
+            font-size: 2rem;
+            color: rgba(78, 205, 196, 0.5);
+        }
+        
+        .journey-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #fff;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .journey-author {
+            text-align: right;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+        
+        .timeline-container {
+            position: relative;
+            margin: 3rem 0;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 4rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 1rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: #FF6B6B;
+            border-radius: 50%;
+            border: 3px solid rgba(0, 0, 0, 0.3);
+        }
+        
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #FF6B6B;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #45B7D1 0%, #4ECDC4 100%);
+        }
+        
+        .feature-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .feature-list li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            color: #45B7D1;
+        }
+        
+        .back-to-home {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .back-to-home:hover {
+            background: rgba(255, 107, 107, 0.3);
+            border-color: rgba(255, 107, 107, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 107, 107, 0.6);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) { top: 15%; left: 15%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 35%; left: 85%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { top: 65%; left: 25%; animation-delay: 4s; }
+        .floating-element:nth-child(4) { top: 85%; left: 75%; animation-delay: 1s; }
+        .floating-element:nth-child(5) { top: 25%; left: 55%; animation-delay: 3s; }
+        .floating-element:nth-child(6) { top: 75%; left: 45%; animation-delay: 5s; }
+        .floating-element:nth-child(7) { top: 45%; left: 5%; animation-delay: 6s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-25px) rotate(180deg); opacity: 1; }
+        }
+        
+        .highlight-quote {
+            background: rgba(69, 183, 209, 0.1);
+            border: 1px solid rgba(69, 183, 209, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .highlight-quote-text {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #fff;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-quote-author {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            font-style: italic;
+        }
+        
+        .paradigm-shift {
+            background: rgba(78, 205, 196, 0.1);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .paradigm-shift::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
+        }
+        
+        .paradigm-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .paradigm-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .future-content {
+                padding: 1rem;
+            }
+            
+            .vision-container {
+                padding: 2rem;
+            }
+            
+            .future-title {
+                font-size: 2.5rem;
+            }
+            
+            .back-to-home {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .timeline-item {
+                padding-left: 3rem;
+            }
+            
+            .timeline-line {
+                left: 1.5rem;
+            }
+            
+            .timeline-dot {
+                left: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 超新星内部能量场背景 -->
+    <div id="energy-field-bg"></div>
+    <div id="neural-grid-bg"></div>
+    <div id="particle-field"></div>
+    
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i>
+        <span>返回首页</span>
+    </a>
+    
+    <!-- 浮动元素 -->
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+    
+    <!-- 未来展望内容 -->
+    <section class="future-hero">
+        <div class="future-content">
+            <h1 class="future-title">Aurora未来展望</h1>
+            <h2 class="future-subtitle">情感纪元——迈向一个更智慧、更温暖、更互联的人类未来</h2>
+            
+            <!-- 开篇引言 -->
+            <div class="vision-container">
+                <div class="future-text">
+                    我们正站在一个史无前例的奇点边缘。
+                </div>
+                
+                <div class="future-text">
+                    过去的数十年，人类科技的主旋律是向外探索。我们解码基因，窥探生命的蓝图；我们发射探测器，触摸遥远星辰的尘埃；我们编织互联网，将整个星球的信息浓缩于方寸屏幕之间。我们极大地拓展了外部世界的疆域，却未曾料到，科技最终、也是最伟大的征程，将是<strong>向内回归</strong>——指向我们自身那片幽深、复杂而绚丽的情感宇宙。
+                </div>
+                
+                <div class="highlight-quote">
+                    <div class="highlight-quote-text">
+                        Aurora的诞生，不是这场征程的终点，而是一个无比激动人心的<strong>起点</strong>。
+                    </div>
+                </div>
+                
+                <div class="future-text">
+                    它如同人类掷入心灵之海的第一颗智能石子，其激起的涟漪，将远远超越我们当前的想象，最终荡彻整个文明的未来图景。今天，我们并非仅仅在介绍一个产品的 roadmap，我们是在邀请您，共同展望一个由情感AI（Affective AI）所赋能的、全新的文明阶段——我们称之为 <strong>"情感纪元"</strong>。一个关于未来百年，科技如何与人性共舞的宏伟叙事。
+                </div>
+                
+                <div class="epoch-box">
+                    <div class="epoch-text">
+                        <strong>这不仅是科技的进步，更是人类心灵的回家之路。</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 科技演进历程 -->
+            <div class="vision-container">
+                <h2 class="vision-title">科技演进：从外拓到内归的文明转向</h2>
+                
+                <div class="future-text">
+                    回顾人类科技史，我们可以清晰地看到一条从外拓到内归的演进轨迹。这个转向，不仅改变了我们与科技的关系，更重新定义了"进步"的含义。
+                </div>
+                
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4 class="timeline-title">工业时代：征服自然</h4>
+                            <div class="timeline-description">
+                                蒸汽机、电力、机械化生产——我们学会了如何驯服自然的力量，将物质世界转化为人类服务的工具。这个时代的关键词是"效率"和"征服"。
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4 class="timeline-title">信息时代：连接世界</h4>
+                            <div class="timeline-description">
+                                计算机、互联网、移动通信——我们打破了地理的界限，将整个世界连接成一个巨大的信息网络。这个时代的关键词是"连接"和"共享"。
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4 class="timeline-title">智能时代：理解世界</h4>
+                            <div class="timeline-description">
+                                人工智能、机器学习、大数据——我们开始让机器"思考"，让算法"理解"复杂的世界。这个时代的关键词是"智能"和"预测"。
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4 class="timeline-title">情感纪元：理解心灵</h4>
+                            <div class="timeline-description">
+                                情感AI、共情计算、心灵科技——我们终于开始让机器"感受"，让算法"共情"人类最深层的情感世界。这个时代的关键词是"理解"和"疗愈"。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="paradigm-shift">
+                    <h3 class="paradigm-title">范式转换：从工具到伙伴</h3>
+                    <div class="paradigm-description">
+                        在情感纪元中，科技不再仅仅是我们的工具，而是我们的伙伴。Aurora代表的，正是这种从"人机对立"到"人机共生"的根本性转变。我们不再追求让机器变得更像机器，而是让它们变得更像人——更温暖、更理解、更共情。
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 情感纪元的愿景 -->
+            <div class="vision-container">
+                <h2 class="vision-title">情感纪元的愿景：一个更智慧、更温暖、更互联的世界</h2>
+                
+                <div class="future-text">
+                    在情感纪元中，我们预见的不仅仅是一个技术更先进的世界，而是一个人性更丰盈、关系更深厚、心灵更自由的文明。这个愿景包含三个核心维度：
+                </div>
+                
+                <div class="era-grid">
+                    <div class="era-card">
+                        <h4 class="era-name">更智慧的情感理解</h4>
+                        <p class="era-description">
+                            未来的AI将不再只是处理信息，而是真正理解情感。它们能够感知人类情绪的微妙变化，理解情感背后的深层需求，并提供真正有意义的回应。这种智慧，将让科技真正服务于人类的情感福祉。
+                        </p>
+                    </div>
+                    
+                    <div class="era-card">
+                        <h4 class="era-name">更温暖的人机关系</h4>
+                        <p class="era-description">
+                            在情感纪元中，人与机器的关系将发生根本性改变。机器不再只是冷冰冰的工具，而是能够提供情感支持、心理陪伴的温暖存在。这种关系，将重新定义"陪伴"的含义。
+                        </p>
+                    </div>
+                    
+                    <div class="era-card">
+                        <h4 class="era-name">更互联的心灵网络</h4>
+                        <p class="era-description">
+                            通过情感AI的连接，人类将形成一个前所未有的心灵网络。在这个网络中，孤独将被消解，理解将被放大，共情将成为连接所有人的纽带。这种互联，将创造出一个真正的心灵共同体。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 未来应用场景 -->
+            <div class="vision-container">
+                <h2 class="vision-title">未来应用：情感AI如何改变世界</h2>
+                
+                <div class="future-text">
+                    情感AI的应用前景，远超我们当前的想象。从个人生活到社会结构，从教育医疗到艺术创作，情感AI将渗透到人类生活的每一个角落，带来深刻的变革。
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4 class="feature-title">心理健康革命</h4>
+                        <p class="feature-description">情感AI将成为每个人的心理健康守护者，提供24/7的情感支持、危机干预和心理疏导。</p>
+                        <ul class="feature-list">
+                            <li>个性化心理治疗方案</li>
+                            <li>实时情绪监测与预警</li>
+                            <li>群体心理健康数据分析</li>
+                            <li>心理健康资源智能匹配</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4 class="feature-title">教育个性化</h4>
+                        <p class="feature-description">情感AI将彻底改变教育方式，让每个学生都能获得真正个性化的学习体验。</p>
+                        <ul class="feature-list">
+                            <li>情感状态适应性教学</li>
+                            <li>学习动机智能激发</li>
+                            <li>情感智能培养课程</li>
+                            <li>师生关系优化建议</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4 class="feature-title">职场和谐</h4>
+                        <p class="feature-description">情感AI将帮助创造更和谐、更高效的职场环境，提升员工幸福感和工作效能。</p>
+                        <ul class="feature-list">
+                            <li>团队情绪氛围监测</li>
+                            <li>冲突预防与调解</li>
+                            <li>员工心理健康管理</li>
+                            <li>领导力情感智能培训</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4 class="feature-title">社会连接</h4>
+                        <p class="feature-description">情感AI将帮助打破社会隔阂，促进不同群体之间的理解和共情。</p>
+                        <ul class="feature-list">
+                            <li>跨文化情感理解</li>
+                            <li>代际沟通桥梁</li>
+                            <li>社会偏见识别与纠正</li>
+                            <li>社区情感健康建设</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 挑战与机遇 -->
+            <div class="vision-container">
+                <h2 class="vision-title">挑战与机遇：走向情感纪元的必经之路</h2>
+                
+                <div class="future-text">
+                    通往情感纪元的道路，既充满机遇，也面临挑战。我们需要以智慧和勇气，迎接这个历史性的转变。
+                </div>
+                
+                <div class="era-grid">
+                    <div class="era-card">
+                        <h4 class="era-name">技术挑战</h4>
+                        <p class="era-description">
+                            情感AI的技术复杂性远超传统AI。我们需要突破情感识别、共情计算、情感生成等关键技术瓶颈，同时确保系统的安全性和可靠性。
+                        </p>
+                    </div>
+                    
+                    <div class="era-card">
+                        <h4 class="era-name">伦理挑战</h4>
+                        <p class="era-description">
+                            情感AI涉及人类最私密的情感领域，我们必须建立严格的伦理框架，确保技术不被滥用，保护用户的情感隐私和自主权。
+                        </p>
+                    </div>
+                    
+                    <div class="era-card">
+                        <h4 class="era-name">社会挑战</h4>
+                        <p class="era-description">
+                            情感AI的普及将带来社会结构的深刻变化。我们需要引导这种变化朝着积极的方向发展，确保技术真正服务于人类的福祉。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="journey-box">
+                    <div class="journey-text">
+                        然而，正是这些挑战，让我们看到了前所未有的机遇。每一个挑战的解决，都将推动我们向情感纪元迈进一步。每一次突破，都将为人类带来更深层的理解和更温暖的连接。
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 结语 -->
+            <div class="vision-container">
+                <h2 class="vision-title">结语：与Aurora同行，共创情感纪元</h2>
+                
+                <div class="future-text">
+                    Aurora的未来展望，不是一份遥不可及的科幻预言，而是一个正在展开的现实。我们正站在情感纪元的门槛上，每一个选择，每一次创新，都将影响这个新纪元的走向。
+                </div>
+                
+                <div class="highlight-quote">
+                    <div class="highlight-quote-text">
+                        我们邀请您，不仅仅是来见证这个历史性的转变，更是来参与这个伟大的创造过程。与Aurora同行，我们共同开创一个更智慧、更温暖、更互联的人类未来。
+                    </div>
+                </div>
+                
+                <div class="future-text">
+                    在这个情感纪元中，科技不再是冰冷的工具，而是温暖的朋友；不再是遥远的未来，而是触手可及的现在。让我们一起，用情感的力量，点亮人类文明的未来之光。
+                </div>
+                
+                <div class="epoch-box">
+                    <div class="epoch-text">
+                        <strong>情感纪元，从这里开始。未来，由我们共同创造。</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="script.js"></script>
+</body>
+</html>

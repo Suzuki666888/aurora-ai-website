@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试Aurora对话连接</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        
+        .chat-area {
+            border: 1px solid #ddd;
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            margin: 10px 0;
+            background: #fafafa;
+        }
+        
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .message {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        
+        .user-message {
+            background: #e3f2fd;
+            text-align: right;
+        }
+        
+        .ai-message {
+            background: #f3e5f5;
+        }
+        
+        .system-message {
+            background: #fff3e0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Aurora对话连接测试</h1>
+        
+        <div id="statusArea">
+            <div class="status info">正在初始化...</div>
+        </div>
+        
+        <div class="chat-area" id="chatArea">
+            <div class="message system-message">欢迎使用Aurora对话测试！请发送一条消息来测试连接。</div>
+        </div>
+        
+        <div class="input-area">
+            <input type="text" id="messageInput" placeholder="输入消息..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()" id="sendBtn">发送</button>
+            <button onclick="testConnection()" id="testBtn">测试连接</button>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <h3>连接状态检查：</h3>
+            <div id="connectionStatus"></div>
+        </div>
+    </div>
+
+    <script src="js/deepseek-api.js"></script>
+    <script>
+        let isConnected = false;
+        
+        // 初始化
+        window.onload = function() {
+            checkConnection();
+        };
+        
+        function updateStatus(message, type = 'info') {
+            const statusArea = document.getElementById('statusArea');
+            statusArea.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+        
+        function addMessage(content, sender = 'system') {
+            const chatArea = document.getElementById('chatArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.textContent = content;
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+        
+        function checkConnection() {
+            updateStatus('正在检查连接状态...', 'info');
+            
+            const checks = [];
+            
+            // 检查DeepSeek API是否加载
+            if (window.deepSeekAPI) {
+                checks.push('✅ DeepSeek API已加载');
+                
+                // 检查API密钥
+                if (window.deepSeekAPI.isApiKeyValid()) {
+                    checks.push('✅ API密钥有效');
+                } else {
+                    checks.push('❌ API密钥无效');
+                }
+                
+                // 检查网络连接
+                if (window.deepSeekAPI.isOnline()) {
+                    checks.push('✅ 网络连接正常');
+                } else {
+                    checks.push('❌ 网络连接异常');
+                }
+                
+                isConnected = window.deepSeekAPI.isApiKeyValid() && window.deepSeekAPI.isOnline();
+                
+                if (isConnected) {
+                    updateStatus('✅ 连接状态正常，可以开始对话！', 'success');
+                } else {
+                    updateStatus('⚠️ 连接状态异常，将使用本地回复', 'warning');
+                }
+            } else {
+                checks.push('❌ DeepSeek API未加载');
+                updateStatus('❌ DeepSeek API未正确加载', 'error');
+            }
+            
+            // 显示详细状态
+            const statusDiv = document.getElementById('connectionStatus');
+            statusDiv.innerHTML = checks.map(check => `<div>${check}</div>`).join('');
+        }
+        
+        async function testConnection() {
+            updateStatus('正在测试API连接...', 'info');
+            addMessage('正在测试API连接...', 'system');
+            
+            try {
+                const testMessage = '你好，这是一个连接测试';
+                const response = await window.deepSeekAPI.sendMessage(testMessage);
+                
+                updateStatus('✅ API连接测试成功！', 'success');
+                addMessage(`测试成功！API回复: ${response}`, 'ai');
+                
+            } catch (error) {
+                updateStatus('❌ API连接测试失败', 'error');
+                addMessage(`测试失败: ${error.message}`, 'system');
+                console.error('连接测试失败:', error);
+            }
+        }
+        
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (!message) return;
+            
+            // 添加用户消息
+            addMessage(message, 'user');
+            messageInput.value = '';
+            
+            // 禁用发送按钮
+            const sendBtn = document.getElementById('sendBtn');
+            sendBtn.disabled = true;
+            sendBtn.textContent = '发送中...';
+            
+            try {
+                updateStatus('正在发送消息...', 'info');
+                
+                let response;
+                if (isConnected && window.deepSeekAPI) {
+                    response = await window.deepSeekAPI.sendMessage(message);
+                } else {
+                    response = await window.deepSeekAPI.getLocalIntelligentResponse(message);
+                }
+                
+                addMessage(response, 'ai');
+                updateStatus('✅ 消息发送成功', 'success');
+                
+            } catch (error) {
+                addMessage('抱歉，发送消息时出现错误。', 'ai');
+                updateStatus('❌ 消息发送失败', 'error');
+                console.error('发送消息失败:', error);
+            } finally {
+                // 恢复发送按钮
+                sendBtn.disabled = false;
+                sendBtn.textContent = '发送';
+            }
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        // 定期检查连接状态
+        setInterval(checkConnection, 30000); // 每30秒检查一次
+    </script>
+</body>
+</html>

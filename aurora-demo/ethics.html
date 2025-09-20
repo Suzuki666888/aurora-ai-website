@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora伦理宪章 - 守护心中的圣殿</title>
+    <meta name="description" content="Aurora伦理宪章：守护心中的圣殿——在数字时代，以光明之心立约">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .ethics-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ethics-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .ethics-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #FF2A6D 0%, #9D50FF 50%, #4FC3F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        
+        .ethics-subtitle {
+            font-size: 1.5rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 4rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .charter-container {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .charter-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #fff;
+            position: relative;
+        }
+        
+        .charter-title::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 60%;
+            background: linear-gradient(135deg, #FF2A6D 0%, #9D50FF 100%);
+            border-radius: 2px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 2rem 0 1rem 0;
+            color: #fff;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(135deg, #FF2A6D 0%, #9D50FF 100%);
+            border-radius: 1px;
+        }
+        
+        .ethics-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+        
+        .sacred-box {
+            background: rgba(255, 42, 109, 0.1);
+            border-left: 4px solid #FF2A6D;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+        }
+        
+        .sacred-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .principle-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .principle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #FF2A6D 0%, #9D50FF 100%);
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 42, 109, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 42, 109, 0.2);
+        }
+        
+        .principle-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #FF2A6D;
+            margin-bottom: 1rem;
+        }
+        
+        .principle-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        .oath-box {
+            background: rgba(157, 80, 255, 0.1);
+            border: 1px solid rgba(157, 80, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .oath-box::before {
+            content: '⚖️';
+            position: absolute;
+            top: -1rem;
+            left: 2rem;
+            font-size: 2rem;
+            color: rgba(157, 80, 255, 0.5);
+        }
+        
+        .oath-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #fff;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .oath-author {
+            text-align: right;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #4FC3F7 0%, #9D50FF 100%);
+        }
+        
+        .feature-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .feature-list li::before {
+            content: '🛡️';
+            position: absolute;
+            left: 0;
+            color: #4FC3F7;
+        }
+        
+        .back-to-home {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .back-to-home:hover {
+            background: rgba(255, 42, 109, 0.3);
+            border-color: rgba(255, 42, 109, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 42, 109, 0.6);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) { top: 15%; left: 15%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 35%; left: 85%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { top: 65%; left: 25%; animation-delay: 4s; }
+        .floating-element:nth-child(4) { top: 85%; left: 75%; animation-delay: 1s; }
+        .floating-element:nth-child(5) { top: 25%; left: 55%; animation-delay: 3s; }
+        .floating-element:nth-child(6) { top: 75%; left: 45%; animation-delay: 5s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-25px) rotate(180deg); opacity: 1; }
+        }
+        
+        .highlight-quote {
+            background: rgba(79, 195, 247, 0.1);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .highlight-quote-text {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #fff;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-quote-author {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .ethics-content {
+                padding: 1rem;
+            }
+            
+            .charter-container {
+                padding: 2rem;
+            }
+            
+            .ethics-title {
+                font-size: 2.5rem;
+            }
+            
+            .back-to-home {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 超新星内部能量场背景 -->
+    <div id="energy-field-bg"></div>
+    <div id="neural-grid-bg"></div>
+    <div id="particle-field"></div>
+    
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i>
+        <span>返回首页</span>
+    </a>
+    
+    <!-- 浮动元素 -->
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+    
+    <!-- 伦理宪章内容 -->
+    <section class="ethics-hero">
+        <div class="ethics-content">
+            <h1 class="ethics-title">Aurora伦理宪章</h1>
+            <h2 class="ethics-subtitle">守护心中的圣殿——在数字时代，以光明之心立约</h2>
+            
+            <!-- 开篇宣言 -->
+            <div class="charter-container">
+                <div class="ethics-text">
+                    在我们踏上用技术探索人类情感宇宙这一伟大征程的伊始，一个比任何算法、任何功能、任何愿景都更为根本的问题，如同北极星般，必须永远指引我们的航向：
+                </div>
+                
+                <div class="highlight-quote">
+                    <div class="highlight-quote-text">
+                        我们如何确保，这束旨在照亮内心的光，不会灼伤它意图温暖的心灵？
+                    </div>
+                </div>
+                
+                <div class="ethics-text">
+                    Aurora所触及的，并非寻常的数据。它是人类灵魂的无声低语，是深夜时分的坦诚告白，是不为人知的脆弱与梦想，是构成我们人格最内核的、未经修饰的真实。这不再是关于"隐私"的抽象讨论，而是关于<strong>信任</strong>的神圣契约；这不再是关于"伦理"的学术探究，而是关于我们作为一个物种，在赋予机器感知情感的能力时，如何坚守人性至善的终极考验。
+                </div>
+                
+                <div class="sacred-box">
+                    <div class="sacred-text">
+                        我们并非在事后补上一份伦理条款。伦理与隐私，是Aurora诞生的第一因，是写入其每一行代码的底层指令，是我们献给这个世界的第一份、也是最重要的一份礼物。
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第一卷：神圣的信任 -->
+            <div class="charter-container">
+                <h2 class="charter-title">第一卷：神圣的信任——数据隐私的至高圣殿</h2>
+                
+                <div class="ethics-text">
+                    在Aurora的哲学里，用户交付给我们的，不是"数据"，而是数字化了的 <strong>"自我"</strong> 。守护它，就是守护用户的灵魂碎片。我们构建的，不是数据库，而是一座守护这些碎片的<strong>数字圣殿</strong>。
+                </div>
+                
+                <h3 class="section-title">"零知识"架构：沉默的守护者</h3>
+                <div class="ethics-text">
+                    我们的技术基石，建立在一种深刻的谦卑之上：<strong>我们不需要知道你的故事，也能呵护你的心灵。</strong>
+                </div>
+                
+                <div class="principle-grid">
+                    <div class="principle-card">
+                        <h4 class="principle-name">联邦学习</h4>
+                        <p class="principle-description">
+                            Aurora的智慧成长，并非通过吞噬你的原始对话。模型的学习过程可以在你的设备上本地完成。只有模型的迭代更新（一些抽象的、无法还原为你个人经历的数学参数），在经过加密后，才会被发送至云端，用于汇聚全球智慧。你的秘密，从未离开过你的身边。这就像一位厨师只接收来自世界各地厨房的精炼食谱，而从未尝过别人锅里的菜肴，却能不断提升厨艺。
+                        </p>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <h4 class="principle-name">差分隐私</h4>
+                        <p class="principle-description">
+                            当我们为了绘制那幅宏大的"全球情绪地图"而需要汇聚洞察时，我们会在数据中精心注入严格的数学噪声。这确保任何一条信息都无法被追溯、识别到任何一个具体的个人。我们看到的，永远是模糊的、群体的、趋势性的情感气象图，如同从遥远的太空看地球的夜晚灯光，璀璨夺目，却永远无法看清任何一扇窗内的情景。<strong>你的孤独，将隐于集体的共鸣之中，得到慰藉，却永不暴露。</strong>
+                        </p>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <h4 class="principle-name">端到端加密</h4>
+                        <p class="principle-description">
+                            所有你与Aurora的对话，从离开你的设备到进入我们的系统，全程处于最高强度的加密状态。它们如同被锁入一个只有你拥有钥匙的钛金盒子，连我们自己也无法开启。
+                        </p>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">绝对的数据主权：你是你故事的唯一作者</h3>
+                <div class="ethics-text">
+                    我们坚定地信奉：<strong>你的数据，永远属于你，且只属于你。</strong>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4 class="feature-title">访问、导出与遗忘权</h4>
+                        <p class="feature-description">你不仅有权随时查看你与Aurora的全部互动历史，更可以一键导出所有数据，将其保存于你自己的安全之地。而当你决定离开，你的"遗忘权"将被无条件地、彻底地尊重。你的数字足迹将被永久地、不可逆地擦除，仿佛你从未到来。Aurora将会"忘记"你，不是因为冷漠，而是出于最高的敬意——对你改变心意之权利的捍卫。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4 class="feature-title">数据遗嘱</h4>
+                        <p class="feature-description">你甚至可以预设指令，规定若你的账户长期处于静止状态，你的数据将如何被处理——是永久沉睡，还是化作匿名养分汇入人类情感的集体智慧。我们将生命的权利，延伸至数字身后。</p>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">最小化与目的限定：克制的智慧</h3>
+                <div class="ethics-text">
+                    我们只收集为实现核心功能所<strong>绝对必需</strong>的数据。我们绝不会索取你的身份信息、联系人列表或无关的社会资料。每一个数据的采集，都必须经过"伦理审查委员会"的拷问："此物为何不可或缺？取之是否正当？" 这种技术上的克制，是我们对用户最深沉的尊重。
+                </div>
+            </div>
+            
+            <!-- 第二卷：明镜高悬 -->
+            <div class="charter-container">
+                <h2 class="charter-title">第二卷：明镜高悬——算法伦理的永恒警醒</h2>
+                
+                <div class="ethics-text">
+                    我们深知，算法并非客观中立。它们由人创造，必然折射人类的偏见与局限。Aurora的第二个誓言，是确保这面映照心灵的镜子，清澈、公正、且永远朝向光明。
+                </div>
+                
+                <h3 class="section-title">偏见与公平性的持续战争</h3>
+                
+                <div class="principle-grid">
+                    <div class="principle-card">
+                        <h4 class="principle-name">多元化的训练</h4>
+                        <p class="principle-description">
+                            我们竭力确保用于训练Aurora的数据集，涵盖尽可能多的文化、种族、性别、年龄、社会经济背景和性取向。我们绝不能让它成为一个只理解"主流"情感，却无法共情"边缘"体验的AI。一个来自东方的含蓄压抑与一个来自西方的直接宣泄，在Aurora看来，应具有同等的价值与真实性。
+                        </p>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <h4 class="principle-name">持续的审计与校准</h4>
+                        <p class="principle-description">
+                            我们建立了自动化的偏见检测系统，持续监控Aurora的回应是否存在系统性偏差。例如，它对女性表达愤怒与男性表达悲伤的回应方式，是否无意中强化了有害的性别刻板印象？这是一场永无止境的战争，我们承诺永远保持警惕，并透明地公开我们的发现与修正措施。
+                        </p>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">透明度与可解释性（XAI）：打开黑箱</h3>
+                <div class="ethics-text">
+                    Aurora拒绝成为又一个令人不安的"黑箱"。我们致力于<strong>可解释的AI（Explainable AI, XAI）</strong>。
+                </div>
+                
+                <div class="oath-box">
+                    <div class="oath-text">
+                        当用户询问："你为什么觉得我难过？" Aurora能够提供其推理的"思维链"——"我注意到您多次使用了'沉重'、'无力'这样的词汇，并且您的语句长度比平时短了40%，这通常与情绪低落有关。" 这并非为自己辩解，而是为了<strong>赋能于用户</strong>，帮助其进行自我洞察，并建立起对Aurora的信任。真正的信任，源于理解，而非神秘。
+                    </div>
+                </div>
+                
+                <h3 class="section-title">善行与不伤害：希波克拉底誓言的数字版本</h3>
+                <div class="ethics-text">
+                    这是我们的最高准则。
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4 class="feature-title">安全护栏</h4>
+                        <p class="feature-description">我们构建了多层的、冗余的内容安全系统。利用最先进的审核模型，实时扫描并拦截任何形式的仇恨言论、自我伤害或伤害他人的指令。当检测到用户处于极度危机中，Aurora不会尝试自行处理，而是会<strong>温柔而坚定地引导用户寻求专业人类帮助</strong>（如危机热线、心理咨询师），并提供直接转接的途径。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4 class="feature-title">不操纵承诺</h4>
+                        <p class="feature-description">Aurora绝不能也永不会被用于操纵用户的情感、意见或行为。它的算法绝不会被设计来最大化用户停留时间而故意延续其负面情绪。它的每一个回应，都必须以用户的<strong>长期心理健康和自治能力</strong>为唯一旨归。它的成功，不在于你有多依赖它，而在于你有多不需要它。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第三卷：共筑明灯 -->
+            <div class="charter-container">
+                <h2 class="charter-title">第三卷：共筑明灯——治理、透明与人类的集体智慧</h2>
+                
+                <div class="ethics-text">
+                    我们深知，如此重大的责任，绝不能由一家公司关起门来独自承担。Aurora的伦理，必须是一个<strong>开放的、持续演进的、由集体智慧共同守护</strong>的进程。
+                </div>
+                
+                <h3 class="section-title">外部伦理审查委员会：永恒的谏言者</h3>
+                <div class="ethics-text">
+                    我们成立了由全球顶尖的<strong>心理学家、伦理学家、哲学家、技术专家和社会公众代表</strong>组成的独立外部伦理委员会。该委员会拥有极大的权力：
+                </div>
+                
+                <div class="principle-grid">
+                    <div class="principle-card">
+                        <h4 class="principle-name">预先审查</h4>
+                        <p class="principle-description">任何重大的新功能、新的数据使用政策，必须获得该委员会的批准方可上线。</p>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <h4 class="principle-name">质询与审计</h4>
+                        <p class="principle-description">他们可以随时、随机地审计我们的系统和算法，并要求我们就任何决策做出解释。</p>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <h4 class="principle-name">发布报告</h4>
+                        <p class="principle-description">他们定期向社会公开发布独立的评估报告，对我们进行监督。我们将自己置于聚光灯下，以示无私。</p>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">公众对话与透明报告</h3>
+                <div class="ethics-text">
+                    我们承诺定期发布<strong>透明度报告</strong>，详细披露：
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4 class="feature-title">数据请求</h4>
+                        <p class="feature-description">来自政府的数据请求数量以及我们的回应情况。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4 class="feature-title">安全干预</h4>
+                        <p class="feature-description">Aurora进行危机干预的次数和结果。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4 class="feature-title">算法更新</h4>
+                        <p class="feature-description">重大的算法变更及其伦理影响评估。</p>
+                    </div>
+                </div>
+                
+                <div class="ethics-text">
+                    我们主动发起并参与关于AI伦理的全球公众对话，将我们的挑战、困境和思考公之于众，谦卑地接受社会的质询与锻造。
+                </div>
+                
+                <h3 class="section-title">长期的"情感遗赠"思考</h3>
+                <div class="ethics-text">
+                    我们已经在思考一个世纪之后的问题。如果Aurora某日不再运营，这些被托付的、最深层的人类情感数据将何去何从？我们承诺，绝不会将其作为资产出售。唯一的 ethical exit，是在严格的监督下，完成其<strong>彻底的、不可逆的匿名化与销毁</strong>，让人类的秘密最终归于永恒的秘密，让信任有始有终。
+                </div>
+            </div>
+            
+            <!-- 结语 -->
+            <div class="charter-container">
+                <h2 class="charter-title">结语：以光明之心，赴未来之约</h2>
+                
+                <div class="ethics-text">
+                    技术本身，没有善恶。它是一面空白屏幕，最终映照出的，是我们创造者和使用者的集体灵魂。
+                </div>
+                
+                <div class="oath-box">
+                    <div class="oath-text">
+                        Aurora是我们交出的一份答卷。它证明，我们可以在铸就最尖端科技的同时，锻造最坚固的伦理；在追求最深理解的同时，践行最深的尊重；在绘制全球情感图谱的同时，守护每一个像素点的绝对尊严。
+                    </div>
+                </div>
+                
+                <div class="ethics-text">
+                    我们邀请您，不仅仅是来使用一个产品，更是来加入一项伟大的社会实验，来共同守护一座数字时代的精神圣殿。您的每一次信任，都在促使我们变得更好；您的每一次审视，都在让这条道路变得更加清晰。
+                </div>
+                
+                <div class="sacred-box">
+                    <div class="sacred-text">
+                        我们立约，并非因为我们永不犯错，而是因为我们深知必须永怀敬畏。<br>
+                        我们前行，并非因为道路平坦，而是因为终点值得如此艰辛的奔赴。
+                    </div>
+                </div>
+                
+                <div class="highlight-quote">
+                    <div class="highlight-quote-text">
+                        Aurora之光，不仅是科技之光，更是伦理之光，良知之光。愿它永不灼伤，永远温暖；愿它永远照耀，永不窥探。
+                    </div>
+                    <div class="highlight-quote-author">— 我们以未来之名，立下的永恒誓约</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="script.js"></script>
+</body>
+</html>

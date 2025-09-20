@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对话调试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .debug-section {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid #444;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success { background: #2d5a2d; }
+        .error { background: #5a2d2d; }
+        .warning { background: #5a5a2d; }
+        .info { background: #2d2d5a; }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #45a049; }
+        textarea {
+            width: 100%;
+            height: 100px;
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .response {
+            background: #333;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #4CAF50;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Aurora对话调试工具</h1>
+    
+    <div class="debug-section">
+        <h2>📊 系统状态检查</h2>
+        <div id="status-checks"></div>
+        <button onclick="runStatusChecks()">🔄 重新检查状态</button>
+    </div>
+    
+    <div class="debug-section">
+        <h2>🧪 API连接测试</h2>
+        <button onclick="testDeepSeekAPI()">测试DeepSeek API连接</button>
+        <button onclick="testLocalResponse()">测试本地智能回复</button>
+        <div id="api-test-results"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>💬 对话测试</h2>
+        <textarea id="test-message" placeholder="输入测试消息...">你好，我有点焦虑</textarea>
+        <br>
+        <button onclick="testDialogue()">发送测试消息</button>
+        <div id="dialogue-results"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>📝 详细日志</h2>
+        <button onclick="clearLogs()">清除日志</button>
+        <div id="detailed-logs"></div>
+    </div>
+
+    <script src="js/deepseek-api.js"></script>
+    <script>
+        let logs = [];
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            logs.push({ message: logEntry, type });
+            console.log(logEntry);
+            updateLogDisplay();
+        }
+        
+        function updateLogDisplay() {
+            const logContainer = document.getElementById('detailed-logs');
+            logContainer.innerHTML = logs.map(log => 
+                `<div class="status ${log.type}">${log.message}</div>`
+            ).join('');
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+        
+        function clearLogs() {
+            logs = [];
+            updateLogDisplay();
+        }
+        
+        function addStatusCheck(title, status, details = '') {
+            const container = document.getElementById('status-checks');
+            const statusClass = status ? 'success' : 'error';
+            const statusText = status ? '✅ 正常' : '❌ 异常';
+            container.innerHTML += `
+                <div class="status ${statusClass}">
+                    <strong>${title}:</strong> ${statusText}
+                    ${details ? `<br><small>${details}</small>` : ''}
+                </div>
+            `;
+        }
+        
+        function runStatusChecks() {
+            log('开始系统状态检查...');
+            document.getElementById('status-checks').innerHTML = '';
+            
+            // 检查DeepSeek API是否加载
+            const apiLoaded = typeof window.deepSeekAPI !== 'undefined';
+            addStatusCheck('DeepSeek API加载', apiLoaded, 
+                apiLoaded ? 'API类已正确加载' : 'API类未加载');
+            
+            if (apiLoaded) {
+                // 检查API密钥
+                const apiKeyValid = window.deepSeekAPI.isApiKeyValid();
+                addStatusCheck('API密钥配置', apiKeyValid,
+                    apiKeyValid ? 'API密钥格式正确' : 'API密钥未配置或格式错误');
+                
+                // 检查网络连接
+                const online = window.deepSeekAPI.isOnline();
+                addStatusCheck('网络连接', online,
+                    online ? '网络连接正常' : '网络连接异常');
+                
+                // 检查API配置
+                const apiKey = window.deepSeekAPI.apiKey;
+                const apiUrl = window.deepSeekAPI.apiUrl;
+                addStatusCheck('API配置', !!(apiKey && apiUrl),
+                    `密钥: ${apiKey ? '已配置' : '未配置'}, URL: ${apiUrl || '未配置'}`);
+                
+                log(`API密钥: ${apiKey ? '已配置' : '未配置'}`);
+                log(`API URL: ${apiUrl || '未配置'}`);
+                log(`网络状态: ${online ? '在线' : '离线'}`);
+            }
+        }
+        
+        async function testDeepSeekAPI() {
+            log('开始测试DeepSeek API连接...');
+            const resultsContainer = document.getElementById('api-test-results');
+            resultsContainer.innerHTML = '<div class="status info">正在测试API连接...</div>';
+            
+            try {
+                if (!window.deepSeekAPI) {
+                    throw new Error('DeepSeek API未加载');
+                }
+                
+                const testMessage = '你好，这是一个连接测试';
+                log(`发送测试消息: ${testMessage}`);
+                
+                const response = await window.deepSeekAPI.sendMessage(testMessage, 'test_session');
+                log(`API响应成功: ${response.substring(0, 100)}...`);
+                
+                resultsContainer.innerHTML = `
+                    <div class="status success">✅ API连接成功</div>
+                    <div class="response">${response}</div>
+                `;
+                
+            } catch (error) {
+                log(`API连接失败: ${error.message}`, 'error');
+                resultsContainer.innerHTML = `
+                    <div class="status error">❌ API连接失败</div>
+                    <div class="status error">错误: ${error.message}</div>
+                `;
+            }
+        }
+        
+        function testLocalResponse() {
+            log('测试本地智能回复...');
+            const resultsContainer = document.getElementById('api-test-results');
+            
+            try {
+                if (!window.deepSeekAPI) {
+                    throw new Error('DeepSeek API未加载');
+                }
+                
+                const testMessage = '我有点焦虑';
+                log(`测试消息: ${testMessage}`);
+                
+                const response = window.deepSeekAPI.getLocalIntelligentResponse(testMessage);
+                log(`本地回复长度: ${response.length} 字符`);
+                
+                resultsContainer.innerHTML = `
+                    <div class="status success">✅ 本地回复正常</div>
+                    <div class="response">${response}</div>
+                `;
+                
+            } catch (error) {
+                log(`本地回复失败: ${error.message}`, 'error');
+                resultsContainer.innerHTML = `
+                    <div class="status error">❌ 本地回复失败</div>
+                    <div class="status error">错误: ${error.message}</div>
+                `;
+            }
+        }
+        
+        async function testDialogue() {
+            log('开始对话测试...');
+            const message = document.getElementById('test-message').value;
+            const resultsContainer = document.getElementById('dialogue-results');
+            
+            if (!message.trim()) {
+                log('测试消息为空', 'warning');
+                return;
+            }
+            
+            resultsContainer.innerHTML = '<div class="status info">正在处理对话...</div>';
+            
+            try {
+                // 模拟dialogue.html中的callAI方法
+                log(`用户消息: ${message}`);
+                
+                if (window.deepSeekAPI) {
+                    log('DeepSeek API状态检查...');
+                    log(`API密钥状态: ${window.deepSeekAPI.isApiKeyValid()}`);
+                    log(`网络状态: ${window.deepSeekAPI.isOnline()}`);
+                    
+                    if (window.deepSeekAPI.isApiKeyValid() && window.deepSeekAPI.isOnline()) {
+                        log('使用DeepSeek API进行对话...');
+                        const response = await window.deepSeekAPI.sendMessage(message, 'test_session');
+                        log(`DeepSeek API响应长度: ${response.length} 字符`);
+                        
+                        resultsContainer.innerHTML = `
+                            <div class="status success">✅ 使用DeepSeek API</div>
+                            <div class="response">${response}</div>
+                        `;
+                    } else {
+                        log('DeepSeek API不可用，使用本地智能回复');
+                        const response = await window.deepSeekAPI.getLocalIntelligentResponse(message);
+                        log(`本地智能回复长度: ${response.length} 字符`);
+                        
+                        resultsContainer.innerHTML = `
+                            <div class="status warning">⚠️ 使用本地智能回复</div>
+                            <div class="response">${response}</div>
+                        `;
+                    }
+                } else {
+                    log('DeepSeek API未加载，使用备用回复', 'error');
+                    const responses = [
+                        "我理解你的感受，让我为你详细分析一下。",
+                        "这是一个很好的问题，我来为你提供一些建议。",
+                        "根据你提供的信息，我的建议是...",
+                        "我明白你的需求，让我为你提供一些帮助。",
+                        "感谢你的分享，我来为你详细说明。"
+                    ];
+                    const response = responses[Math.floor(Math.random() * responses.length)];
+                    
+                    resultsContainer.innerHTML = `
+                        <div class="status error">❌ 使用备用回复</div>
+                        <div class="response">${response}</div>
+                    `;
+                }
+                
+            } catch (error) {
+                log(`对话测试失败: ${error.message}`, 'error');
+                resultsContainer.innerHTML = `
+                    <div class="status error">❌ 对话测试失败</div>
+                    <div class="status error">错误: ${error.message}</div>
+                `;
+            }
+        }
+        
+        // 页面加载时自动运行状态检查
+        document.addEventListener('DOMContentLoaded', () => {
+            log('调试页面已加载');
+            runStatusChecks();
+        });
+    </script>
+</body>
+</html>

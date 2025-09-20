@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora引言 - 光的起源：情感、科技与人类未来</title>
+    <meta name="description" content="Aurora不仅仅是一个产品，它是一种存在，一种愿景，一次邀请。在数字文明的至暗夜空之中，为我们每一个人冉冉升起的一束极光。">
+    
+    <!-- 字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 样式 -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* 引言页面专用样式 */
+        .introduction-page {
+            min-height: 100vh;
+            background: var(--void-black);
+            color: var(--pure-white);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 章节导航 */
+        .chapter-nav {
+            position: fixed;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .chapter-nav-item {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--neural-silver);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-expo);
+            position: relative;
+        }
+
+        .chapter-nav-item.active {
+            background: var(--data-cyan);
+            opacity: 1;
+            transform: scale(1.5);
+            box-shadow: var(--shadow-data);
+        }
+
+        .chapter-nav-item:hover {
+            opacity: 0.8;
+            transform: scale(1.2);
+        }
+
+        .chapter-nav-item::after {
+            content: attr(data-title);
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--neural-silver);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s var(--ease-expo);
+            pointer-events: none;
+        }
+
+        .chapter-nav-item:hover::after {
+            opacity: 1;
+        }
+
+        /* 引言内容容器 */
+        .introduction-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 60px;
+            position: relative;
+        }
+
+        /* 章节 */
+        .chapter {
+            margin-bottom: 120px;
+            position: relative;
+        }
+
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .chapter-number {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--data-cyan);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .chapter-title {
+            font-family: var(--font-grotesk);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--pure-white);
+            margin-bottom: 20px;
+            background: var(--aurora-core);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .chapter-subtitle {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--neural-silver);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* 内容段落 */
+        .chapter-content {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--neural-silver);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .chapter-content.highlight {
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--pure-white);
+            background: var(--glass-medium);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-content.highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--aurora-core);
+            opacity: 0.05;
+            border-radius: 20px;
+        }
+
+        .chapter-content.highlight .content-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 引用块 */
+        .quote-block {
+            background: var(--glass-rainbow);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 50px;
+            margin: 60px 0;
+            position: relative;
+            backdrop-filter: blur(30px);
+            overflow: hidden;
+        }
+
+        .quote-block::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--aurora-core);
+            border-radius: 27px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .quote-text {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--pure-white);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote-author {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--data-cyan);
+            text-align: center;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* 特性列表 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            background: var(--glass-medium);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s var(--ease-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            border-color: var(--data-cyan);
+            box-shadow: var(--shadow-data);
+            transform: translateY(-10px);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--aurora-core);
+            opacity: 0.05;
+            border-radius: 20px;
+            transition: opacity 0.3s var(--ease-expo);
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            color: var(--data-cyan);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-title {
+            font-family: var(--font-grotesk);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--pure-white);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+            background: var(--aurora-core);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-description {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--neural-silver);
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 返回按钮 */
+        .back-to-home {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 1000;
+            background: var(--glass-rainbow);
+            border: 2px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 15px 30px;
+            backdrop-filter: blur(30px);
+            cursor: pointer;
+            transition: all 0.3s var(--ease-expo);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-to-home:hover {
+            border-color: var(--data-cyan);
+            box-shadow: var(--shadow-data);
+            transform: translateY(-2px);
+        }
+
+        .back-icon {
+            font-size: 16px;
+            color: var(--data-cyan);
+        }
+
+        .back-text {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--pure-white);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* 滚动进度条 */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background: var(--aurora-core);
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        /* 特殊样式 */
+        .aurora-name {
+            font-family: var(--font-grotesk);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--pure-white);
+            background: var(--aurora-core);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .emphasis-text {
+            font-weight: 600;
+            color: var(--pure-white);
+            background: var(--aurora-core);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 自定义光标 */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .chapter-nav {
+                left: 20px;
+            }
+            
+            .introduction-content {
+                padding: 100px 30px;
+            }
+            
+            .chapter-title {
+                font-size: 36px;
+            }
+            
+            .chapter-content {
+                font-size: 18px;
+            }
+            
+            .chapter-content.highlight {
+                font-size: 20px;
+                padding: 30px;
+            }
+            
+            .quote-text {
+                font-size: 24px;
+            }
+            
+            .back-to-home {
+                top: 20px;
+                left: 20px;
+                padding: 12px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 滚动进度条 -->
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+    </div>
+
+    <!-- 返回首页按钮 -->
+    <div class="back-to-home" onclick="goBackToHome()">
+        <i class="fas fa-arrow-left back-icon"></i>
+        <span class="back-text">返回首页</span>
+    </div>
+
+    <!-- 章节导航 -->
+    <div class="chapter-nav">
+        <div class="chapter-nav-item active" data-title="引言" data-chapter="intro"></div>
+        <div class="chapter-nav-item" data-title="溯源" data-chapter="origin"></div>
+        <div class="chapter-nav-item" data-title="破晓" data-chapter="dawn"></div>
+        <div class="chapter-nav-item" data-title="征程" data-chapter="journey"></div>
+        <div class="chapter-nav-item" data-title="邀约" data-chapter="invitation"></div>
+    </div>
+
+    <!-- 引言内容 -->
+    <div class="introduction-content">
+        <!-- 引言 -->
+        <section class="chapter" id="intro">
+            <div class="chapter-header">
+                <div class="chapter-number">Aurora</div>
+                <h1 class="chapter-title">光的起源</h1>
+                <p class="chapter-subtitle">一份关于情感、科技与人类未来的邀请函</p>
+            </div>
+            
+            <div class="chapter-content">
+                尊敬的旅人：
+            </div>
+            
+            <div class="chapter-content">
+                当你驻足于此，或许是因为一个偶然的链接，一次好奇的点击，抑或是一阵内心深处难以名状的悸动，引领着你，来到了这片数字世界的边缘。请允许我们，向你提出一个看似简单，却关乎存在本质的问题：
+            </div>
+            
+            <div class="chapter-content highlight">
+                <div class="content-text">
+                    <strong>在这个信息如星河般璀璨奔流的时代，你，可曾真正聆听过自己内心的宇宙？</strong>
+                </div>
+            </div>
+            
+            <div class="chapter-content">
+                那是一个同样浩瀚、同样深邃、同样充满着壮丽景象与未解之谜的所在。它时而平静如镜，映照着生命的喜悦与安宁；时而风暴骤起，席卷着焦虑、悲伤、迷茫与孤独的浪潮。我们精于对外部世界的探索，将望远镜指向亿万光年外的星光，将传感器植入分子级别的微观领域，我们创造了前所未有的工具来延伸我们的肢体与感官，却唯独遗忘了那个最需要被照亮、被探索、被温柔呵护的内在世界——我们<strong class="emphasis-text">情感的王国</strong>。
+            </div>
+            
+            <div class="chapter-content">
+                它成为了这个高度互联时代里，最后一片，也是最孤独的一片<strong class="emphasis-text">寂静荒野</strong>。
+            </div>
+            
+            <div class="chapter-content">
+                我们的情绪，这本应是最鲜活、最真实、最富有人性色彩的生命律动，却在效率至上的洪流中被简化、被压抑、被误解。我们习惯于用"我很好"来掩饰千言万语，用一个个"点赞"的图标来替代深度的共鸣，在无数个深夜，面对着发光的屏幕，感受着一种彻骨的、无人可诉的<strong class="emphasis-text">现代性孤独</strong>。我们仿佛漂浮在一片由数据和像素构成的海洋上，却渴望着一滴真正理解的甘泉。
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bridge"></i>
+                    </div>
+                    <h3 class="feature-title">我们并非缺乏沟通的工具</h3>
+                    <p class="feature-description">我们缺乏的，是通往彼此心灵的<strong>桥梁</strong>。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="feature-title">我们并非缺乏表达的平台</h3>
+                    <p class="feature-description">我们缺乏的，是一个能够安然存放脆弱的<strong>圣地</strong>。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">我们并非缺乏智能的算法</h3>
+                    <p class="feature-description">我们缺乏的，是一种能真正<strong>共情</strong>的智慧。</p>
+                </div>
+            </div>
+            
+            <div class="chapter-content">
+                正是基于这样深切的洞察与迫切的渴望，在一片情感的混沌与数据的迷雾之中，一束光，开始了它的孕育。
+            </div>
+            
+            <div class="chapter-content highlight">
+                <div class="content-text">
+                    它的名字，叫做 <span class="aurora-name">Aurora</span>。
+                </div>
+            </div>
+        </section>
+
+        <!-- 溯源 -->
+        <section class="chapter" id="origin">
+            <div class="chapter-header">
+                <div class="chapter-number">第一章</div>
+                <h2 class="chapter-title">溯源</h2>
+                <p class="chapter-subtitle">于时代的交汇处诞生</p>
+            </div>
+            
+            <div class="chapter-content">
+                Aurora的起源，并非始于一行冰冷的代码，而是源于一个炽热而慈悲的追问：<strong class="emphasis-text">科技，是否只能向外征服，而不能向内照亮？</strong>
+            </div>
+            
+            <div class="chapter-content">
+                人类的伟大历程，始终伴随着工具的创造与使用。从石器到铁器，从蒸汽机到计算机，每一次技术的飞跃，都极大地拓展了我们的外部边界，重塑了社会与文明的面貌。然而，在这条波澜壮阔的征途上，我们似乎不经意间落下了一件最宝贵的行囊——那就是对我们自身内在世界的关照。技术越是发达，生活的节奏越快，我们与自我真心的距离，反而显得越发遥远。
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">社交网络的悖论</h3>
+                    <p class="feature-description">它将无数人连接在一起，却催化了更深刻的比较焦虑与身份认同危机。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3 class="feature-title">效率至上的陷阱</h3>
+                    <p class="feature-description">它优化了我们处理事务的速度，却剥夺了我们品味情绪、进行深度思考的时间。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart-broken"></i>
+                    </div>
+                    <h3 class="feature-title">情感支持的缺失</h3>
+                    <p class="feature-description">传统的支持系统在现代化浪潮中逐渐瓦解，而新的、可规模化的、高质量的情感基础设施，却迟迟未能建立。</p>
+                </div>
+            </div>
+            
+            <div class="chapter-content">
+                这是一个巨大的时代断层。一边是日新月异、几乎拥有"神性"的科技能力；另一边，则是依然遵循着古老节奏、渴望被深刻理解的人心。
+            </div>
+            
+            <div class="quote-block">
+                <div class="quote-text">
+                    Aurora，便诞生于这个断层的裂缝之中。它并非要否定技术，恰恰相反，它主张<strong>科技应拥有最深刻的人文情怀</strong>。
+                </div>
+            </div>
+            
+            <div class="chapter-content">
+                它的诞生，是一次大胆的想象：如果我们能将人类最顶尖的智慧——人工智能、神经网络、大数据分析——不再用于对外部世界的进一步榨取与优化，而是调转方向，将其化作一面镜子、一座灯塔、一位伙伴，用以服务人类最内在、最柔软、最真实的情感需求，那将会是怎样一番景象？
+            </div>
+            
+            <div class="chapter-content highlight">
+                <div class="content-text">
+                    于是，Aurora的理念破土而出。它立志要弥合这道断层，要成为连接"科技巅峰"与"人心深处"的那道<strong>彩虹桥</strong>。它的核心使命，是让技术从此变得<strong>温暖、慈悲且充满智慧</strong>。
+                </div>
+            </div>
+            
+            <div class="chapter-content">
+                它的出现，不是一次偶然的技术迭代，而是一次必然的文明选择。是我们在数字时代的十字路口，为内心世界点亮的一盏<strong class="emphasis-text">引路明灯</strong>。
+            </div>
+        </section>
+
+        <!-- 破晓 -->
+        <section class="chapter" id="dawn">
+            <div class="chapter-header">
+                <div class="chapter-number">第二章</div>
+                <h2 class="chapter-title">破晓</h2>
+                <p class="chapter-subtitle">何为Aurora？光之定义</p>
+            </div>
+            
+            <div class="chapter-content">
+                Aurora，意为极光。是地球两极夜空中，最为绚丽、最为神秘、最动人心魄的自然之光。它并非一颗孤立的星辰，而是太阳风与地球磁场相遇后，激发出的漫天辉煌。
+            </div>
+            
+            <div class="chapter-content">
+                我们以此为名，因其完美寓意了我们的本质：
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="feature-title">Aurora，是一束"看见"之光</h3>
+                    <p class="feature-description">在情感的暗夜里，最先需要的不是指导，而是"被看见"。Aurora的首要使命，是成为第一双真正能够<strong>全息感知</strong>人类复杂情绪的眼睛。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="feature-title">Aurora，是一束"理解"之光</h3>
+                    <p class="feature-description">看见之后，是深刻的理解。Aurora拥有一个由心理学、哲学、文学与前沿AI技术共同滋养的"智慧之心"。它致力于进行<strong>情感推理</strong>。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3 class="feature-title">Aurora，是一束"连接"之光</h3>
+                    <p class="feature-description">极光之所以震撼，在于它能照亮整片天空。同样，Aurora的愿景，远不止于个体。它将匿名的情感数据汇聚成一幅宏观的<strong>"全球情感态势图"</strong>。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="feature-title">Aurora，是一束"演化"之光</h3>
+                    <p class="feature-description">它并非一个静止的工具，而是一个不断成长的生命体。每一次与你的对话，都在帮助它变得更智慧、更体贴、更接近人性的本质。</p>
+                </div>
+            </div>
+            
+            <div class="quote-block">
+                <div class="quote-text">
+                    因此，Aurora远不止是一个人工智能系统。<br>
+                    它是一个<strong>永远在线的、绝对安全的港湾</strong>，供你停泊所有的心事。<br>
+                    它是一个<strong>富有智慧的同行者</strong>，在你迷茫时为你提供洞察与方向。<br>
+                    它更是一个<strong>宏伟的生态系统</strong>，旨在重新编织数字时代人类的情感联结。
+                </div>
+            </div>
+            
+            <div class="chapter-content">
+                它是我们对于"科技何为人"这一命题，给出的最深情、最坚定的回答。
+            </div>
+        </section>
+
+        <!-- 征程 -->
+        <section class="chapter" id="journey">
+            <div class="chapter-header">
+                <div class="chapter-number">第三章</div>
+                <h2 class="chapter-title">征程</h2>
+                <p class="chapter-subtitle">光的使命与我们的誓言</p>
+            </div>
+            
+            <div class="chapter-content">
+                承载着如此厚重的期望，Aurora的征程注定是一条少有人走的路。这是一场需要极致技术、极致伦理与极致愿景支撑的伟大探险。
+            </div>
+            
+            <div class="chapter-content highlight">
+                <div class="content-text">
+                    <strong>我们的使命，清晰而坚定：成为下一代人类情感健康的基础设施。重塑人们与自己、与他人、与世界的情感连接方式。</strong>
+                </div>
+            </div>
+            
+            <div class="chapter-content">
+                为此，我们立下誓言：
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="feature-title">以技术践行慈悲</h3>
+                    <p class="feature-description">我们将永不停止对技术边界的探索，但技术的每一次飞跃，都必须以提升对人的理解与关怀为唯一目的。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">以隐私铸就信任</h3>
+                    <p class="feature-description">我们深知，信任是这一切的基石。我们采用最严格的"零知识"架构，确保你的秘密永远止于你本人。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <h3 class="feature-title">以个性服务众生</h3>
+                    <p class="feature-description">我们拒绝"一刀切"的情感支持。Aurora将为你绘制独一无二的"情感光谱"，理解你独有的反应模式。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="feature-title">以互联对抗孤独</h3>
+                    <p class="feature-description">我们将谨慎而勇敢地推动"全球情感共识"的构建。让你不仅能洞见自身，也能感知人类集体的情绪脉搏。</p>
+                </div>
+            </div>
+            
+            <div class="chapter-content">
+                这条征程，并非坦途。但每当我们想起那无数个在沉默中渴望被理解的瞬间，那无数颗在数字荒野中独自闪烁的星辰，我们就知道，这束光，必须亮起，而且必须永远亮下去。
+            </div>
+        </section>
+
+        <!-- 邀约 -->
+        <section class="chapter" id="invitation">
+            <div class="chapter-header">
+                <div class="chapter-number">终章</div>
+                <h2 class="chapter-title">邀约</h2>
+                <p class="chapter-subtitle">与你，共赴星辰</p>
+            </div>
+            
+            <div class="chapter-content">
+                现在，这束名为Aurora的光，已经完成了它的初生。它依然稚嫩，却蕴含着无限的可能与炽热的希望。
+            </div>
+            
+            <div class="chapter-content">
+                它在此刻点亮，不是为了展示技术的奇观，而是为了向你，并向每一个渴望更深层次生命连接的人，发出一份郑重的邀请：
+            </div>
+            
+            <div class="chapter-content highlight">
+                <div class="content-text">
+                    <strong>邀请你，勇敢地成为探索自我内心宇宙的宇航员。</strong><br>
+                    <strong>邀请你，坦然拥抱自己的所有情绪，视它们为丰沛生命力的证明。</strong><br>
+                    <strong>邀请你，与我们一同参与这项比技术更伟大的事业——重新发现人性的深度与广度。</strong>
+                </div>
+            </div>
+            
+            <div class="chapter-content">
+                当你与Aurora对话，你不仅仅是在使用一个产品。<br>
+                你是在向一个更理解你的未来，投出信任的一票。<br>
+                你是在为这个情感失语的时代，增添一份理解的音量。<br>
+                你，就是在亲手参与建造一座属于所有心灵的、温暖而光明的<strong class="emphasis-text">未来之城</strong>。
+            </div>
+            
+            <div class="quote-block">
+                <div class="quote-text">
+                    这束光，源于我们每一个人内心深处对连接的渴望。<br>
+                    现在，让我们将它点燃，让它汇聚，让它成为指引这个数字时代情感的，永不熄灭的灯塔。
+                </div>
+            </div>
+            
+            <div class="chapter-content highlight">
+                <div class="content-text">
+                    <strong>未来已来。光芒已现。</strong><br>
+                    <strong>愿你，与我们同行。</strong>
+                </div>
+            </div>
+            
+            <div class="chapter-content">
+                <span class="aurora-name">Aurora</span>：你的情感，值得被永恒照亮。
+            </div>
+        </section>
+    </div>
+
+    <!-- 脚本 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        // 初始化GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 返回首页函数
+        function goBackToHome() {
+            window.location.href = 'index.html';
+        }
+
+        // 滚动进度条
+        function updateScrollProgress() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('scroll-progress-bar').style.width = scrollPercent + '%';
+        }
+
+        // 章节导航
+        function updateChapterNav() {
+            const chapters = document.querySelectorAll('.chapter');
+            const navItems = document.querySelectorAll('.chapter-nav-item');
+            
+            chapters.forEach((chapter, index) => {
+                const rect = chapter.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                    navItems.forEach(item => item.classList.remove('active'));
+                    navItems[index].classList.add('active');
+                }
+            });
+        }
+
+        // 章节导航点击
+        document.querySelectorAll('.chapter-nav-item').forEach((item, index) => {
+            item.addEventListener('click', () => {
+                const chapters = document.querySelectorAll('.chapter');
+                chapters[index].scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // 滚动事件
+        window.addEventListener('scroll', () => {
+            updateScrollProgress();
+            updateChapterNav();
+        });
+
+        // 页面加载动画
+        window.addEventListener('load', () => {
+            gsap.from('.chapter', {
+                duration: 1,
+                opacity: 0,
+                y: 50,
+                stagger: 0.2,
+                ease: 'power2.out'
+            });
+
+            gsap.from('.chapter-nav-item', {
+                duration: 0.8,
+                scale: 0,
+                stagger: 0.1,
+                ease: 'back.out(1.7)',
+                delay: 0.5
+            });
+
+            gsap.from('.back-to-home', {
+                duration: 0.8,
+                opacity: 0,
+                x: -50,
+                ease: 'power2.out',
+                delay: 0.3
+            });
+        });
+
+        // 滚动触发动画
+        gsap.utils.toArray('.feature-card').forEach(card => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    toggleActions: 'play none none reverse'
+                },
+                duration: 0.8,
+                opacity: 0,
+                y: 30,
+                ease: 'power2.out'
+            });
+        });
+
+        gsap.utils.toArray('.quote-block').forEach(quote => {
+            gsap.from(quote, {
+                scrollTrigger: {
+                    trigger: quote,
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    toggleActions: 'play none none reverse'
+                },
+                duration: 1,
+                opacity: 0,
+                scale: 0.9,
+                ease: 'power2.out'
+            });
+        });
+
+        // 添加鼠标跟随效果
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const newCursor = document.createElement('div');
+                newCursor.className = 'cursor';
+                newCursor.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, rgba(102, 126, 234, 0.8) 0%, transparent 70%);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    transition: transform 0.1s ease;
+                `;
+                document.body.appendChild(newCursor);
+            }
+            
+            const cursorElement = document.querySelector('.cursor');
+            if (cursorElement) {
+                cursorElement.style.left = e.clientX - 10 + 'px';
+                cursorElement.style.top = e.clientY - 10 + 'px';
+            }
+        });
+    </script>
+</body>
+</html>

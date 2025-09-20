@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #007bff;
+        }
+        .error {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+        .success {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+    </style>
+</head>
+<body>
+    <h1>API调用测试页面</h1>
+    
+    <div class="test-section">
+        <h2>1. 检查API配置</h2>
+        <button onclick="checkApiConfig()">检查配置</button>
+        <div id="config-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. 测试API连接</h2>
+        <button onclick="testApiConnection()">测试连接</button>
+        <div id="connection-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. 发送测试消息</h2>
+        <input type="text" id="test-message" placeholder="输入测试消息" value="你好，心屿" style="width: 300px; padding: 8px;">
+        <button onclick="sendTestMessage()">发送消息</button>
+        <div id="message-result" class="result"></div>
+    </div>
+
+    <!-- DeepSeek API已移除以保护隐私 -->
+    <script>
+        function checkApiConfig() {
+            const resultDiv = document.getElementById('config-result');
+            
+            try {
+                resultDiv.innerHTML = `
+                    <strong>⚠️ DeepSeek API 已移除</strong><br>
+                    为了保护API密钥隐私，DeepSeek API相关功能已从演示版本中移除。<br>
+                    完整版本包含完整的API集成功能。
+                `;
+                resultDiv.className = 'result warning';
+            } catch (error) {
+                resultDiv.innerHTML = `<strong>❌ 检查失败:</strong> ${error.message}`;
+                resultDiv.className = 'result error';
+            }
+        }
+
+        async function testApiConnection() {
+            const resultDiv = document.getElementById('connection-result');
+            resultDiv.innerHTML = '正在测试连接...';
+            
+            try {
+                resultDiv.innerHTML = `
+                    <strong>⚠️ API连接测试不可用</strong><br>
+                    DeepSeek API已从演示版本中移除以保护隐私。<br>
+                    完整版本支持完整的API连接测试功能。
+                `;
+                resultDiv.className = 'result warning';
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <strong>❌ 连接失败:</strong><br>
+                    错误: ${error.message}<br>
+                    详细信息: ${error.stack || '无'}
+                `;
+                resultDiv.className = 'result error';
+            }
+        }
+
+        async function sendTestMessage() {
+            const message = document.getElementById('test-message').value;
+            const resultDiv = document.getElementById('message-result');
+            
+            if (!message.trim()) {
+                resultDiv.innerHTML = '<strong>❌ 请输入测试消息</strong>';
+                resultDiv.className = 'result error';
+                return;
+            }
+            
+            resultDiv.innerHTML = '正在发送消息...';
+            
+            try {
+                resultDiv.innerHTML = `
+                    <strong>⚠️ 消息发送功能不可用</strong><br>
+                    DeepSeek API已从演示版本中移除以保护隐私。<br>
+                    完整版本支持完整的AI对话功能。
+                `;
+                resultDiv.className = 'result warning';
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <strong>❌ 消息发送失败:</strong><br>
+                    错误: ${error.message}<br>
+                    详细信息: ${error.stack || '无'}
+                `;
+                resultDiv.className = 'result error';
+            }
+        }
+
+        // 页面加载时自动检查配置
+        window.onload = function() {
+            checkApiConfig();
+        };
+    </script>
+</body>
+</html>

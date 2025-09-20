@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek API连接测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-section {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid #444;
+        }
+        .result {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+        .success { background: #2d5a2d; border-left: 4px solid #4CAF50; }
+        .error { background: #5a2d2d; border-left: 4px solid #f44336; }
+        .info { background: #2d2d5a; border-left: 4px solid #2196F3; }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover { background: #45a049; }
+        button:disabled { background: #666; cursor: not-allowed; }
+        textarea {
+            width: 100%;
+            height: 80px;
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>🔗 DeepSeek API连接测试</h1>
+    
+    <div class="test-section">
+        <h2>📋 测试信息</h2>
+        <p><strong>API密钥:</strong> sk-5786e431682e4229a2e63994d4968f15</p>
+        <p><strong>API端点:</strong> https://api.deepseek.com/v1/chat/completions</p>
+        <p><strong>模型:</strong> deepseek-chat</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>🧪 直接API测试</h2>
+        <textarea id="test-message" placeholder="输入测试消息...">你好，请介绍一下你自己</textarea>
+        <br>
+        <button onclick="testDirectAPI()" id="direct-test-btn">测试直接API调用</button>
+        <div id="direct-api-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔧 DeepSeek API类测试</h2>
+        <button onclick="testDeepSeekClass()" id="class-test-btn">测试DeepSeek API类</button>
+        <div id="class-api-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📊 网络状态检查</h2>
+        <button onclick="checkNetworkStatus()">检查网络状态</button>
+        <div id="network-status"></div>
+    </div>
+
+    <script>
+        async function testDirectAPI() {
+            const btn = document.getElementById('direct-test-btn');
+            const resultDiv = document.getElementById('direct-api-result');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> 测试中...';
+            
+            const testMessage = document.getElementById('test-message').value || '你好，请介绍一下你自己';
+            
+            try {
+                resultDiv.innerHTML = '<div class="result info">正在发送请求到DeepSeek API...</div>';
+                
+                const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer sk-5786e431682e4229a2e63994d4968f15'
+                    },
+                    body: JSON.stringify({
+                        model: 'deepseek-chat',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: '你是一个友好的AI助手，请用中文回复。'
+                            },
+                            {
+                                role: 'user',
+                                content: testMessage
+                            }
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 1000
+                    })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`HTTP ${response.status}: ${errorData.error?.message || '未知错误'}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.choices && data.choices[0] && data.choices[0].message) {
+                    const reply = data.choices[0].message.content;
+                    resultDiv.innerHTML = `
+                        <div class="result success">✅ API调用成功！</div>
+                        <div class="result info">响应长度: ${reply.length} 字符</div>
+                        <div class="result info">回复内容:\n${reply}</div>
+                    `;
+                } else {
+                    throw new Error('API响应格式错误');
+                }
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result error">❌ API调用失败</div>
+                    <div class="result error">错误信息: ${error.message}</div>
+                `;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '测试直接API调用';
+            }
+        }
+        
+        async function testDeepSeekClass() {
+            const btn = document.getElementById('class-test-btn');
+            const resultDiv = document.getElementById('class-api-result');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> 测试中...';
+            
+            try {
+                // 动态加载DeepSeek API类
+                if (typeof window.deepSeekAPI === 'undefined') {
+                    const script = document.createElement('script');
+                    script.src = 'js/deepseek-api.js';
+                    script.onload = () => {
+                        runDeepSeekClassTest();
+                    };
+                    script.onerror = () => {
+                        resultDiv.innerHTML = '<div class="result error">❌ 无法加载DeepSeek API类</div>';
+                        btn.disabled = false;
+                        btn.innerHTML = '测试DeepSeek API类';
+                    };
+                    document.head.appendChild(script);
+                } else {
+                    runDeepSeekClassTest();
+                }
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result error">❌ 测试失败</div>
+                    <div class="result error">错误信息: ${error.message}</div>
+                `;
+                btn.disabled = false;
+                btn.innerHTML = '测试DeepSeek API类';
+            }
+            
+            async function runDeepSeekClassTest() {
+                try {
+                    resultDiv.innerHTML = '<div class="result info">正在测试DeepSeek API类...</div>';
+                    
+                    const testMessage = '你好，请介绍一下你自己';
+                    const response = await window.deepSeekAPI.sendMessage(testMessage, 'test_session');
+                    
+                    resultDiv.innerHTML = `
+                        <div class="result success">✅ DeepSeek API类测试成功！</div>
+                        <div class="result info">响应长度: ${response.length} 字符</div>
+                        <div class="result info">回复内容:\n${response}</div>
+                    `;
+                    
+                } catch (error) {
+                    resultDiv.innerHTML = `
+                        <div class="result error">❌ DeepSeek API类测试失败</div>
+                        <div class="result error">错误信息: ${error.message}</div>
+                    `;
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = '测试DeepSeek API类';
+                }
+            }
+        }
+        
+        function checkNetworkStatus() {
+            const resultDiv = document.getElementById('network-status');
+            
+            resultDiv.innerHTML = '<div class="result info">正在检查网络状态...</div>';
+            
+            // 检查基本网络连接
+            const isOnline = navigator.onLine;
+            
+            // 尝试访问DeepSeek API端点
+            fetch('https://api.deepseek.com/v1/models', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer sk-5786e431682e4229a2e63994d4968f15'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="result success">✅ 网络连接正常</div>
+                        <div class="result info">浏览器在线状态: ${isOnline ? '在线' : '离线'}</div>
+                        <div class="result info">DeepSeek API端点可达: 是</div>
+                        <div class="result info">HTTP状态: ${response.status}</div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="result error">⚠️ 网络连接异常</div>
+                        <div class="result info">浏览器在线状态: ${isOnline ? '在线' : '离线'}</div>
+                        <div class="result info">DeepSeek API端点可达: 是</div>
+                        <div class="result error">HTTP状态: ${response.status}</div>
+                    `;
+                }
+            })
+            .catch(error => {
+                resultDiv.innerHTML = `
+                    <div class="result error">❌ 网络连接失败</div>
+                    <div class="result info">浏览器在线状态: ${isOnline ? '在线' : '离线'}</div>
+                    <div class="result error">DeepSeek API端点可达: 否</div>
+                    <div class="result error">错误信息: ${error.message}</div>
+                `;
+            });
+        }
+        
+        // 页面加载时自动检查网络状态
+        document.addEventListener('DOMContentLoaded', () => {
+            checkNetworkStatus();
+        });
+    </script>
+</body>
+</html>

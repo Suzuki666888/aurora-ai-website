@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora AI 启动器</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .launcher {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff2a6d, #9d50ff, #4fc3f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+        
+        .warning {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid rgba(255, 193, 7, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #ffc107;
+        }
+        
+        .warning-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .instructions {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #4CAF50;
+        }
+        
+        .step {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            text-align: left;
+        }
+        
+        .step-number {
+            background: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .button {
+            background: linear-gradient(45deg, #ff2a6d, #9d50ff);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 42, 109, 0.3);
+        }
+        
+        .button.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .button.secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="launcher">
+        <div class="logo">🌌</div>
+        <div class="title">Aurora AI</div>
+        <div class="subtitle">情感疗愈AI助手</div>
+        
+        <div class="warning">
+            <div class="warning-icon">⚠️</div>
+            <strong>重要提示：</strong><br>
+            直接双击HTML文件无法正常工作！<br>
+            必须通过HTTP服务器访问才能使用所有功能。
+        </div>
+        
+        <div class="instructions">
+            <strong>🚀 正确的启动方式：</strong>
+            <div class="step">
+                <span class="step-number">1</span>
+                双击"启动Aurora对话.command"文件
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                等待浏览器自动打开对话页面
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                开始与Aurora对话
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <a href="javascript:void(0)" class="button" onclick="openDialogue()">
+                💬 打开对话页面
+            </a>
+            <a href="javascript:void(0)" class="button secondary" onclick="openDebug()">
+                🔧 打开调试页面
+            </a>
+        </div>
+        
+        <div style="margin-top: 20px; font-size: 14px; color: #999;">
+            如果页面无法打开，请手动访问：<br>
+            <strong>http://localhost:8000/dialogue.html</strong>
+        </div>
+    </div>
+
+    <script>
+        function openDialogue() {
+            // 尝试打开对话页面
+            const url = 'http://localhost:8000/dialogue.html';
+            
+            // 检查服务器是否运行
+            fetch('http://localhost:8000/', { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        window.open(url, '_blank');
+                    } else {
+                        alert('服务器未运行！请先双击"启动Aurora对话.command"文件启动服务器。');
+                    }
+                })
+                .catch(error => {
+                    alert('服务器未运行！请先双击"启动Aurora对话.command"文件启动服务器。\n\n或者手动运行：\npython3 -m http.server 8000');
+                });
+        }
+        
+        function openDebug() {
+            const url = 'http://localhost:8000/debug-dialogue.html';
+            
+            fetch('http://localhost:8000/', { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        window.open(url, '_blank');
+                    } else {
+                        alert('服务器未运行！请先启动服务器。');
+                    }
+                })
+                .catch(error => {
+                    alert('服务器未运行！请先启动服务器。');
+                });
+        }
+        
+        // 页面加载时检查服务器状态
+        window.addEventListener('load', () => {
+            fetch('http://localhost:8000/', { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('✅ 服务器正在运行');
+                    }
+                })
+                .catch(error => {
+                    console.log('❌ 服务器未运行');
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-box {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid #444;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover { background: #45a049; }
+        .result {
+            background: #333;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            border-left: 4px solid #4CAF50;
+        }
+        .error {
+            border-left-color: #f44336;
+            background: #5a2d2d;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 简单连接测试</h1>
+    
+    <div class="test-box">
+        <h2>步骤1: 检查API加载</h2>
+        <button onclick="checkAPI()">检查DeepSeek API</button>
+        <div id="api-check"></div>
+    </div>
+    
+    <div class="test-box">
+        <h2>步骤2: 测试API调用</h2>
+        <button onclick="testAPI()">测试API调用</button>
+        <div id="api-test"></div>
+    </div>
+    
+    <div class="test-box">
+        <h2>步骤3: 测试对话</h2>
+        <button onclick="testChat()">测试对话</button>
+        <div id="chat-test"></div>
+    </div>
+
+    <script src="js/deepseek-api.js"></script>
+    <script>
+        function checkAPI() {
+            const resultDiv = document.getElementById('api-check');
+            
+            if (typeof window.deepSeekAPI !== 'undefined') {
+                resultDiv.innerHTML = `
+                    <div class="result">✅ DeepSeek API已加载</div>
+                    <div class="result">API密钥: ${window.deepSeekAPI.apiKey ? '已配置' : '未配置'}</div>
+                    <div class="result">API URL: ${window.deepSeekAPI.apiUrl}</div>
+                    <div class="result">网络状态: ${window.deepSeekAPI.isOnline() ? '在线' : '离线'}</div>
+                    <div class="result">API密钥有效: ${window.deepSeekAPI.isApiKeyValid() ? '是' : '否'}</div>
+                `;
+            } else {
+                resultDiv.innerHTML = '<div class="result error">❌ DeepSeek API未加载</div>';
+            }
+        }
+        
+        async function testAPI() {
+            const resultDiv = document.getElementById('api-test');
+            resultDiv.innerHTML = '<div class="result">正在测试API调用...</div>';
+            
+            try {
+                if (!window.deepSeekAPI) {
+                    throw new Error('DeepSeek API未加载');
+                }
+                
+                const response = await window.deepSeekAPI.sendMessage('你好，请简单介绍一下你自己', 'test');
+                
+                resultDiv.innerHTML = `
+                    <div class="result">✅ API调用成功</div>
+                    <div class="result">回复长度: ${response.length} 字符</div>
+                    <div class="result">回复内容:\n${response}</div>
+                `;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result error">❌ API调用失败</div>
+                    <div class="result error">错误: ${error.message}</div>
+                `;
+            }
+        }
+        
+        async function testChat() {
+            const resultDiv = document.getElementById('chat-test');
+            resultDiv.innerHTML = '<div class="result">正在测试对话...</div>';
+            
+            try {
+                // 模拟dialogue.html中的逻辑
+                const message = '我有点焦虑';
+                
+                if (window.deepSeekAPI) {
+                    if (window.deepSeekAPI.isApiKeyValid() && window.deepSeekAPI.isOnline()) {
+                        const response = await window.deepSeekAPI.sendMessage(message, 'test_session');
+                        resultDiv.innerHTML = `
+                            <div class="result">✅ 使用DeepSeek API</div>
+                            <div class="result">回复长度: ${response.length} 字符</div>
+                            <div class="result">回复内容:\n${response}</div>
+                        `;
+                    } else {
+                        const response = await window.deepSeekAPI.getLocalIntelligentResponse(message);
+                        resultDiv.innerHTML = `
+                            <div class="result">⚠️ 使用本地智能回复</div>
+                            <div class="result">回复长度: ${response.length} 字符</div>
+                            <div class="result">回复内容:\n${response}</div>
+                        `;
+                    }
+                } else {
+                    throw new Error('DeepSeek API未加载');
+                }
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result error">❌ 对话测试失败</div>
+                    <div class="result error">错误: ${error.message}</div>
+                `;
+            }
+        }
+        
+        // 页面加载时自动检查API
+        window.addEventListener('load', () => {
+            setTimeout(checkAPI, 1000);
+        });
+    </script>
+</body>
+</html>

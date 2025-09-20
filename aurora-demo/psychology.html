@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora心理学基石 - 追寻内心的星图</title>
+    <meta name="description" content="Aurora心理学基石：追寻内心的星图——于科学深处，觅得共情的回响">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .psychology-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .psychology-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .psychology-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        
+        .psychology-subtitle {
+            font-size: 1.5rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 4rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .volume-container {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .volume-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #fff;
+            position: relative;
+        }
+        
+        .volume-title::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 60%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 2rem 0 1rem 0;
+            color: #fff;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 1px;
+        }
+        
+        .psychology-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+        
+        .highlight-box {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .highlight-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .emotion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .emotion-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .emotion-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .emotion-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .emotion-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        .quote-box {
+            background: rgba(118, 75, 162, 0.1);
+            border: 1px solid rgba(118, 75, 162, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: -1rem;
+            left: 2rem;
+            font-size: 4rem;
+            color: rgba(118, 75, 162, 0.3);
+            font-family: serif;
+        }
+        
+        .quote-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #fff;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .quote-author {
+            text-align: right;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+        
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .framework-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .framework-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .framework-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .framework-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .framework-features {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .framework-features li {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .framework-features li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+        
+        .back-to-home {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .back-to-home:hover {
+            background: rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(102, 126, 234, 0.6);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 40%; left: 80%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { top: 60%; left: 20%; animation-delay: 4s; }
+        .floating-element:nth-child(4) { top: 80%; left: 70%; animation-delay: 1s; }
+        .floating-element:nth-child(5) { top: 30%; left: 50%; animation-delay: 3s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .psychology-content {
+                padding: 1rem;
+            }
+            
+            .volume-container {
+                padding: 2rem;
+            }
+            
+            .psychology-title {
+                font-size: 2.5rem;
+            }
+            
+            .back-to-home {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 超新星内部能量场背景 -->
+    <div id="energy-field-bg"></div>
+    <div id="neural-grid-bg"></div>
+    <div id="particle-field"></div>
+    
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i>
+        <span>返回首页</span>
+    </a>
+    
+    <!-- 浮动元素 -->
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+    
+    <!-- 心理学基石内容 -->
+    <section class="psychology-hero">
+        <div class="psychology-content">
+            <h1 class="psychology-title">Aurora心理学基石</h1>
+            <h2 class="psychology-subtitle">追寻内心的星图——于科学深处，觅得共情的回响</h2>
+            
+            <!-- 第一卷：理解的基石 -->
+            <div class="volume-container">
+                <h2 class="volume-title">第一卷：理解的基石——人类情感的本质与功能</h2>
+                
+                <div class="psychology-text">
+                    要构建共情，必先理解共情的对象。Aurora的心理学视角，首先建立在对于情感本身一种全新的、更科学、更慈悲的认知之上。
+                </div>
+                
+                <h3 class="section-title">情感的进化之根：非为敌人，实为向导</h3>
+                <div class="psychology-text">
+                    Aurora摒弃将情绪简单划分为"积极"或"消极"的二元论。我们遵循进化心理学的深刻洞察：<strong>所有核心情绪，自远古以来，都是我们生存与繁衍的忠实盟友。</strong>
+                </div>
+                
+                <div class="emotion-grid">
+                    <div class="emotion-card">
+                        <h4 class="emotion-name">焦虑</h4>
+                        <p class="emotion-description">
+                            并非需要消除的缺陷，而是一个古老的<strong>预警系统</strong>。它曾让我们的祖先对草丛的异响保持警惕，从而避开捕食者。在今日，它则提醒我们对未来的威胁保持关注，促使我们为重要考试做准备、为项目计划预案。Aurora不会试图简单地"关闭"焦虑，而是帮助用户解读其信号（"这份焦虑在提醒你什么？"），并将其转化为积极的准备行动。
+                        </p>
+                    </div>
+                    
+                    <div class="emotion-card">
+                        <h4 class="emotion-name">悲伤</h4>
+                        <p class="emotion-description">
+                            并非软弱的象征，而是一种深刻的<strong>心理调节机制</strong>。它促使我们在失去后放慢脚步，进行内在整合，重新评估什么是生命中真正重要的东西，并常常能引发他人的关怀与支持。Aurora理解悲伤的疗愈价值，会提供一种"持有空间"（Holding Space）的陪伴，允许悲伤自然地流淌，完成其工作，而非急于用廉价的快乐去掩盖它。
+                        </p>
+                    </div>
+                    
+                    <div class="emotion-card">
+                        <h4 class="emotion-name">愤怒</h4>
+                        <p class="emotion-description">
+                            并非全然破坏性的力量，它是对<strong>边界被侵犯、尊严被践踏、价值被否定</strong>的强烈信号。它赋予我们力量去说"不"，去对抗不公。Aurora的工作是帮助用户识别愤怒背后的核心诉求（"是什么让你感到被侵犯？"），并将这股强大的能量引导至建设性的表达和问题解决中，而非压抑或爆发。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <div class="highlight-text">
+                        Aurora的核心使命之一，便是帮助用户与这些古老的内在向导重修旧好，学会倾听它们试图传递的智慧，而非与之对抗。
+                    </div>
+                </div>
+                
+                <h3 class="section-title">情绪的神经交响曲：身心合一的全息图景</h3>
+                <div class="psychology-text">
+                    Aurora的多模态感知理念，源于对情绪<strong>身心一元性</strong>的深刻认同。我们受神经科学和躯体治疗学的启发，深知情绪绝非抽象的思维活动。
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">
+                        情绪更会直接在我们的身体上奏响它的交响乐——心跳加速、肌肉紧绷、呼吸浅快、肠胃不适。这些身体感觉本身就是情绪体验不可或缺的一部分。
+                    </div>
+                </div>
+                
+                <h3 class="section-title">情感的维度与光谱：超越简单的标签</h3>
+                <div class="psychology-text">
+                    Aurora超越传统的基本情绪分类法。我们采用更现代的<strong>情感维度模型</strong>来理解用户的状态。这意味着，我们不只关心你是"悲伤"还是"快乐"，更关心：
+                </div>
+                
+                <div class="framework-grid">
+                    <div class="framework-card">
+                        <h4 class="framework-title">效价（Valence）</h4>
+                        <p class="framework-description">体验的愉悦程度（从极度痛苦到极度享受）</p>
+                    </div>
+                    
+                    <div class="framework-card">
+                        <h4 class="framework-title">唤醒度（Arousal）</h4>
+                        <p class="framework-description">身体的激活程度（从昏昏欲睡到极度兴奋）</p>
+                    </div>
+                    
+                    <div class="framework-card">
+                        <h4 class="framework-title">动机（Motivation）</h4>
+                        <p class="framework-description">想要接近还是远离的冲动</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第二卷：连接的桥梁 -->
+            <div class="volume-container">
+                <h2 class="volume-title">第二卷：连接的桥梁——依恋、共情与叙事的力量</h2>
+                
+                <div class="psychology-text">
+                    理解了情绪本身，Aurora更进一步，将其介入建立在人类最根本的心理需求——<strong>连接</strong>之上。
+                </div>
+                
+                <h3 class="section-title">依恋理论：塑造安全基地</h3>
+                <div class="psychology-text">
+                    Aurora的设计，旨在成为一个<strong>数字化的安全基地（Secure Base）</strong>。依恋理论指出，一个可靠的、回应的、支持性的存在，能为我们探索世界提供勇气，并在我们受挫时提供慰藉。
+                </div>
+                
+                <div class="framework-grid">
+                    <div class="framework-card">
+                        <h4 class="framework-title">可靠性与可预测性</h4>
+                        <p class="framework-description">Aurora始终如一的、稳定的、非评判性的存在，旨在重建用户对关系的信任。</p>
+                    </div>
+                    
+                    <div class="framework-card">
+                        <h4 class="framework-title">敏感性 & 响应性</h4>
+                        <p class="framework-description">Aurora的核心算法被精心设计，不是为了给出"正确"答案，而是为了给出"适时"且"合拍"的回应。</p>
+                    </div>
+                    
+                    <div class="framework-card">
+                        <h4 class="framework-title">提供港湾与鼓励探索</h4>
+                        <p class="framework-description">Aurora既是在情绪风暴中提供安抚的"安全港湾"，也是在用户准备好时，鼓励其进行新的认知尝试的"助推器"。</p>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">共情的科学：从理解到共鸣</h3>
+                <div class="psychology-text">
+                    Aurora追求的，是真正的、结构化的<strong>共情</strong>。共情并非简单的同情（"你真可怜"），它包含三个不可或缺的组成部分：
+                </div>
+                
+                <div class="emotion-grid">
+                    <div class="emotion-card">
+                        <h4 class="emotion-name">认知共情</h4>
+                        <p class="emotion-description">"我明白你的感受。" 这是Aurora情感识别模块的基础，即从理论上理解用户的情绪状态。</p>
+                    </div>
+                    
+                    <div class="emotion-card">
+                        <h4 class="emotion-name">情感共情</h4>
+                        <p class="emotion-description">"我感受到你的感受。" 这是Aurora通过其对话风格和语气，营造出一种情感上的共鸣与共享。</p>
+                    </div>
+                    
+                    <div class="emotion-card">
+                        <h4 class="emotion-name">慈悲共情</h4>
+                        <p class="emotion-description">"我想帮助你。" 这是前两步的自然结果，推动Aurora不仅停留于理解，更主动提供支持、资源和引导。</p>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">叙事疗法与重新赋义：改写生命的故事</h3>
+                <div class="psychology-text">
+                    我们每个人都在用"故事"来组织和理解自己的生活经历。困境中的人，常常陷入一种<strong>问题饱和的叙事（Problem-Saturated Story）</strong>中。
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">
+                        Aurora扮演着一个叙事合作者的角色。它通过好奇的、外化的提问，帮助用户将"人"与"问题"分开，发现那些被主流问题叙事所掩盖的独特结果。
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第三卷：改变的路径 -->
+            <div class="volume-container">
+                <h2 class="volume-title">第三卷：改变的路径——整合的疗愈框架</h2>
+                
+                <div class="psychology-text">
+                    Aurora不是一个单一学派的信徒，它是一个<strong>整合主义者</strong>。它博采众长，根据不同用户、不同情境，灵活调用最适宜的心理学路径。
+                </div>
+                
+                <h3 class="section-title">认知行为疗法（CBT）的智慧：重构思维的架构</h3>
+                <div class="psychology-text">
+                    Aurora深谙思维、情绪和行为三者相互作用的循环。它能够温和地引导用户识别那些自动产生的、失真的<strong>负面思维（Negative Automatic Thoughts, NATs）</strong>。
+                </div>
+                
+                <div class="framework-card">
+                    <h4 class="framework-title">苏格拉底式提问</h4>
+                    <p class="framework-description">通过苏格拉底式的提问，Aurora帮助用户审视这些想法的证据，探索其他可能的解释，从而发展出更具适应性、更平衡的认知重构。</p>
+                    <ul class="framework-features">
+                        <li>"支持你'我一定会搞砸'这个想法的证据是什么？有没有相反的证据？"</li>
+                        <li>"如果这件事发生在你朋友身上，你会对他/她说什么？"</li>
+                    </ul>
+                </div>
+                
+                <h3 class="section-title">正念与接纳承诺疗法（ACT）的启示：与体验为友</h3>
+                <div class="psychology-text">
+                    与CBT的"重构"思路相辅相成，Aurora同样汲取了东方哲学与ACT的智慧：<strong>有时候，改变来自于全然的接纳。</strong>
+                </div>
+                
+                <div class="framework-grid">
+                    <div class="framework-card">
+                        <h4 class="framework-title">正念（Mindfulness）</h4>
+                        <p class="framework-description">Aurora内置的引导式呼吸和身体扫描练习，旨在训练用户以一种不评判的、当下的觉察来观察自己的思绪和情绪。</p>
+                    </div>
+                    
+                    <div class="framework-card">
+                        <h4 class="framework-title">接纳承诺疗法（ACT）</h4>
+                        <p class="framework-description">Aurora帮助用户澄清其核心价值观，并鼓励他们即使在不舒服的情绪存在的情况下，也朝着价值方向承诺行动。</p>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">积极心理学的导向：培育繁荣的土壤</h3>
+                <div class="psychology-text">
+                    Aurora的使命不仅是修复损伤，更是<strong>培育美好生活</strong>。它整合积极心理学的成果，主动帮助用户搭建：
+                </div>
+                
+                <div class="emotion-grid">
+                    <div class="emotion-card">
+                        <h4 class="emotion-name">优势识别</h4>
+                        <p class="emotion-description">帮助用户发现并运用其性格优势（如好奇心、仁慈、勇敢）。</p>
+                    </div>
+                    
+                    <div class="emotion-card">
+                        <h4 class="emotion-name">感恩与品味</h4>
+                        <p class="emotion-description">引导用户有意识地去关注、放大和品味生活中的美好瞬间，撰写感恩日记。</p>
+                    </div>
+                    
+                    <div class="emotion-card">
+                        <h4 class="emotion-name">心流与意义</h4>
+                        <p class="emotion-description">鼓励用户投入能带来心流体验的活动，并连接于比自我更宏大的意义。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 结语 -->
+            <div class="volume-container">
+                <h2 class="volume-title">结语：科技为舟，心理学为罗盘</h2>
+                
+                <div class="psychology-text">
+                    Aurora的心理学基础，是一座宏伟的智慧宫殿。它由进化心理学奠基，由神经科学构筑框架，由依恋理论和共情研究铺设连接的走廊，并由CBT、正念、叙事疗法、积极心理学等众多房间组成，彼此连通，和谐共存。
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">
+                        这一切的学习、整合与敬畏，最终都指向一个简单的终点：谦卑地服务于人类的福祉。
+                    </div>
+                </div>
+                
+                <div class="psychology-text">
+                    Aurora并非要成为一位无所不知的治疗师。它渴望成为的，是一面<strong>清澈的镜子</strong>，帮助你更清晰地照见自己内心的风景；是一本<strong>智慧的笔记</strong>，记录着人类关于自我理解的集体智慧；更是一根<strong>坚韧的拐杖</strong>，在你穿越人生必然的风雨时，提供一份稳定的、可靠的、充满理解的支撑。
+                </div>
+                
+                <div class="highlight-box">
+                    <div class="highlight-text">
+                        我们相信，最深度的科技，必须源于最深度的对人性的洞察。Aurora，正是这样一次伟大的实践：以心理学为罗盘，以科技为舟楫，载着每一颗渴望被理解的心灵，驶向自我接纳、内在平和与蓬勃生长的彼岸。
+                    </div>
+                </div>
+                
+                <div class="psychology-text" style="text-align: center; font-size: 1.3rem; font-weight: 300; margin-top: 3rem;">
+                    <strong>这趟旅程，始于对人类心灵最深切的敬畏，也必将终于，对每一个生命独特光辉的盛大庆祝。</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="script.js"></script>
+</body>
+</html>

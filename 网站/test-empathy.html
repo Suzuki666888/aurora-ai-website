@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试Aurora共情回复</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            background: #f7fafc;
+        }
+        
+        .test-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        
+        .test-button:hover {
+            background: #5a67d8;
+        }
+        
+        .test-button:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+        }
+        
+        .response-area {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 15px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        
+        .stats {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .stats h4 {
+            margin: 0 0 10px 0;
+            color: #2d3748;
+        }
+        
+        .stats p {
+            margin: 5px 0;
+            color: #4a5568;
+        }
+        
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .preset-messages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .preset-btn {
+            background: #e2e8f0;
+            color: #4a5568;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .preset-btn:hover {
+            background: #cbd5e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💝 Aurora共情回复测试</h1>
+        
+        <div class="test-section">
+            <h3>📊 测试统计</h3>
+            <div class="stats">
+                <h4>回复质量指标</h4>
+                <p>✅ 共情表达: 使用"我感受到..."、"我能理解..."等表达</p>
+                <p>✅ 回复长度: 每次回复至少400字</p>
+                <p>✅ 情感确认: 确认用户情感是合理和正常的</p>
+                <p>✅ 温暖语言: 用最温暖的语言给予支持</p>
+                <p>✅ 具体建议: 提供具体的安慰和支持方法</p>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🎯 快速测试</h3>
+            <div class="preset-messages">
+                <button class="preset-btn" onclick="testMessage('我最近很焦虑')">焦虑测试</button>
+                <button class="preset-btn" onclick="testMessage('我感到很孤独')">孤独测试</button>
+                <button class="preset-btn" onclick="testMessage('我很难过')">悲伤测试</button>
+                <button class="preset-btn" onclick="testMessage('我很生气')">愤怒测试</button>
+                <button class="preset-btn" onclick="testMessage('我很困惑')">困惑测试</button>
+                <button class="preset-btn" onclick="testMessage('我压力很大')">压力测试</button>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>💬 自定义测试</h3>
+            <div class="input-area">
+                <input type="text" id="customInput" placeholder="输入你想测试的消息..." value="我最近工作压力很大，感觉很累">
+                <button class="test-button" onclick="testCustomMessage()">测试回复</button>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📝 Aurora的回复</h3>
+            <div id="responseArea" class="response-area">等待测试...</div>
+            <div class="stats" id="responseStats" style="display: none;">
+                <h4>回复分析</h4>
+                <p id="wordCount">字数: 0</p>
+                <p id="empathyScore">共情度: 0%</p>
+                <p id="warmthScore">温暖度: 0%</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/deepseek-api.js"></script>
+    <script>
+        let testCount = 0;
+        
+        function log(message) {
+            console.log(`[Aurora测试] ${message}`);
+        }
+        
+        async function testMessage(message) {
+            document.getElementById('customInput').value = message;
+            await testCustomMessage();
+        }
+        
+        async function testCustomMessage() {
+            const message = document.getElementById('customInput').value.trim();
+            if (!message) {
+                alert('请输入测试消息');
+                return;
+            }
+            
+            const responseArea = document.getElementById('responseArea');
+            const statsDiv = document.getElementById('responseStats');
+            
+            responseArea.textContent = '正在生成回复...';
+            statsDiv.style.display = 'none';
+            
+            try {
+                log(`开始测试消息: "${message}"`);
+                
+                let response;
+                if (window.deepSeekAPI && window.deepSeekAPI.isApiKeyValid() && window.deepSeekAPI.isOnline()) {
+                    log('使用DeepSeek API生成回复');
+                    response = await window.deepSeekAPI.sendMessage(message);
+                } else {
+                    log('使用本地智能回复');
+                    response = await window.deepSeekAPI.getLocalIntelligentResponse(message);
+                }
+                
+                log(`收到回复: ${response.substring(0, 100)}...`);
+                
+                responseArea.textContent = response;
+                analyzeResponse(response);
+                testCount++;
+                
+            } catch (error) {
+                log(`测试失败: ${error.message}`);
+                responseArea.textContent = `测试失败: ${error.message}`;
+            }
+        }
+        
+        function analyzeResponse(response) {
+            const statsDiv = document.getElementById('responseStats');
+            const wordCount = response.length;
+            const wordCountElement = document.getElementById('wordCount');
+            const empathyScoreElement = document.getElementById('empathyScore');
+            const warmthScoreElement = document.getElementById('warmthScore');
+            
+            // 计算共情度
+            const empathyKeywords = ['我感受到', '我能理解', '我明白', '我深深理解', '我完全理解'];
+            const empathyCount = empathyKeywords.reduce((count, keyword) => {
+                return count + (response.includes(keyword) ? 1 : 0);
+            }, 0);
+            const empathyScore = Math.min(100, (empathyCount / empathyKeywords.length) * 100);
+            
+            // 计算温暖度
+            const warmthKeywords = ['亲爱的', '温暖', '陪伴', '支持', '理解', '关怀', '爱'];
+            const warmthCount = warmthKeywords.reduce((count, keyword) => {
+                return count + (response.includes(keyword) ? 1 : 0);
+            }, 0);
+            const warmthScore = Math.min(100, (warmthCount / warmthKeywords.length) * 100);
+            
+            wordCountElement.textContent = `字数: ${wordCount} ${wordCount >= 400 ? '✅' : '❌'}`;
+            empathyScoreElement.textContent = `共情度: ${empathyScore.toFixed(1)}% ${empathyScore >= 60 ? '✅' : '❌'}`;
+            warmthScoreElement.textContent = `温暖度: ${warmthScore.toFixed(1)}% ${warmthScore >= 60 ? '✅' : '❌'}`;
+            
+            statsDiv.style.display = 'block';
+            
+            log(`回复分析 - 字数: ${wordCount}, 共情度: ${empathyScore.toFixed(1)}%, 温暖度: ${warmthScore.toFixed(1)}%`);
+        }
+        
+        // 页面加载时自动检查
+        window.onload = function() {
+            log('页面加载完成');
+            
+            if (typeof window.deepSeekAPI === 'undefined') {
+                document.getElementById('responseArea').textContent = '❌ DeepSeek API未加载';
+                return;
+            }
+            
+            const apiKeyValid = window.deepSeekAPI.isApiKeyValid();
+            const online = window.deepSeekAPI.isOnline();
+            
+            log(`API状态 - 密钥有效: ${apiKeyValid}, 网络在线: ${online}`);
+            
+            if (apiKeyValid && online) {
+                document.getElementById('responseArea').textContent = '✅ DeepSeek API已就绪，可以开始测试';
+            } else {
+                document.getElementById('responseArea').textContent = '⚠️ 将使用本地智能回复进行测试';
+            }
+        };
+    </script>
+</body>
+</html>

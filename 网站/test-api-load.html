@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API加载测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-box {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid #444;
+        }
+        .result {
+            background: #333;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            border-left: 4px solid #4CAF50;
+        }
+        .error {
+            border-left-color: #f44336;
+            background: #5a2d2d;
+        }
+        .success {
+            border-left-color: #4CAF50;
+            background: #2d5a2d;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover { background: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>🔍 API加载诊断</h1>
+    
+    <div class="test-box">
+        <h2>步骤1: 检查脚本加载</h2>
+        <div id="script-check"></div>
+    </div>
+    
+    <div class="test-box">
+        <h2>步骤2: 检查全局对象</h2>
+        <div id="global-check"></div>
+    </div>
+    
+    <div class="test-box">
+        <h2>步骤3: 检查API实例</h2>
+        <div id="instance-check"></div>
+    </div>
+    
+    <div class="test-box">
+        <h2>步骤4: 手动创建API实例</h2>
+        <button onclick="createAPI()">手动创建API</button>
+        <div id="manual-check"></div>
+    </div>
+
+    <script>
+        // 页面加载完成后检查
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                checkScriptLoad();
+                checkGlobalObject();
+                checkAPIInstance();
+            }, 1000);
+        });
+        
+        function checkScriptLoad() {
+            const resultDiv = document.getElementById('script-check');
+            
+            // 检查脚本标签
+            const scripts = document.getElementsByTagName('script');
+            let deepseekScript = null;
+            
+            for (let script of scripts) {
+                if (script.src && script.src.includes('deepseek-api.js')) {
+                    deepseekScript = script;
+                    break;
+                }
+            }
+            
+            if (deepseekScript) {
+                resultDiv.innerHTML = `
+                    <div class="result success">✅ 找到DeepSeek脚本标签</div>
+                    <div class="result">脚本路径: ${deepseekScript.src}</div>
+                    <div class="result">脚本状态: ${deepseekScript.readyState || '已加载'}</div>
+                `;
+            } else {
+                resultDiv.innerHTML = '<div class="result error">❌ 未找到DeepSeek脚本标签</div>';
+            }
+        }
+        
+        function checkGlobalObject() {
+            const resultDiv = document.getElementById('global-check');
+            
+            const checks = [
+                { name: 'window对象', value: typeof window !== 'undefined' },
+                { name: 'window.deepSeekAPI', value: typeof window.deepSeekAPI !== 'undefined' },
+                { name: 'DeepSeekAPI类', value: typeof DeepSeekAPI !== 'undefined' }
+            ];
+            
+            let html = '';
+            checks.forEach(check => {
+                const status = check.value ? '✅' : '❌';
+                const className = check.value ? 'success' : 'error';
+                html += `<div class="result ${className}">${status} ${check.name}: ${check.value ? '存在' : '不存在'}</div>`;
+            });
+            
+            resultDiv.innerHTML = html;
+        }
+        
+        function checkAPIInstance() {
+            const resultDiv = document.getElementById('instance-check');
+            
+            if (window.deepSeekAPI) {
+                try {
+                    const apiKey = window.deepSeekAPI.apiKey;
+                    const apiUrl = window.deepSeekAPI.apiUrl;
+                    const isOnline = window.deepSeekAPI.isOnline();
+                    const isValidKey = window.deepSeekAPI.isApiKeyValid();
+                    
+                    resultDiv.innerHTML = `
+                        <div class="result success">✅ DeepSeek API实例存在</div>
+                        <div class="result">API密钥: ${apiKey ? '已配置' : '未配置'}</div>
+                        <div class="result">API URL: ${apiUrl}</div>
+                        <div class="result">网络状态: ${isOnline ? '在线' : '离线'}</div>
+                        <div class="result">密钥有效: ${isValidKey ? '是' : '否'}</div>
+                    `;
+                } catch (error) {
+                    resultDiv.innerHTML = `
+                        <div class="result error">❌ API实例检查失败</div>
+                        <div class="result error">错误: ${error.message}</div>
+                    `;
+                }
+            } else {
+                resultDiv.innerHTML = '<div class="result error">❌ DeepSeek API实例不存在</div>';
+            }
+        }
+        
+        function createAPI() {
+            const resultDiv = document.getElementById('manual-check');
+            
+            try {
+                // 手动创建API实例
+                const api = new DeepSeekAPI();
+                
+                resultDiv.innerHTML = `
+                    <div class="result success">✅ 手动创建API成功</div>
+                    <div class="result">API密钥: ${api.apiKey ? '已配置' : '未配置'}</div>
+                    <div class="result">API URL: ${api.apiUrl}</div>
+                    <div class="result">网络状态: ${api.isOnline() ? '在线' : '离线'}</div>
+                    <div class="result">密钥有效: ${api.isApiKeyValid() ? '是' : '否'}</div>
+                `;
+                
+                // 设置全局实例
+                window.deepSeekAPI = api;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result error">❌ 手动创建API失败</div>
+                    <div class="result error">错误: ${error.message}</div>
+                `;
+            }
+        }
+    </script>
+    
+    <!-- 加载DeepSeek API -->
+    <script src="js/deepseek-api.js"></script>
+</body>
+</html>
