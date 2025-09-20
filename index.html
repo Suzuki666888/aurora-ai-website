@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Aurora - 超新星内部的数据交响乐</title>
+    <meta name="description" content="Aurora：一场在超新星内部进行的数据交响乐。不是AI，而是来自未来的情感能量体。">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 超新星内部能量场背景 -->
+    <div id="energy-field-bg"></div>
+    <div id="neural-grid-bg"></div>
+    <div id="particle-field"></div>
+    
+    <!-- 主容器 -->
+    <div class="main-container">
+        <!-- 极简导航栏 -->
+        <nav class="navbar-ultra">
+            <div class="nav-brand-ultra">
+                <span class="brand-text-ultra">AURORA</span>
+            </div>
+            <div class="nav-links-ultra">
+                <a href="philosophy.html" class="nav-link-ultra">理念</a>
+                <a href="dialogue.html" class="nav-link-ultra">对话奇点</a>
+                <a href="#story" class="nav-link-ultra">故事</a>
+                <a href="#truth-module" class="nav-link-ultra">真理模块</a>
+                <button class="nav-login-btn" id="nav-login-btn" onclick="handleLogin()">
+                    <i class="fas fa-user"></i>
+                    <span id="login-text">登录</span>
+                </button>
+                <button class="nav-login-btn" id="nav-dashboard-btn" onclick="goToDashboard()" style="display: none;">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>用户中心</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- 事件视界首页 -->
+        <section class="event-horizon-section">
+            <!-- 巨大的AURORA背景文字 -->
+            <div class="aurora-bg-text" id="aurora-bg-text">
+                <span class="aurora-letter">A</span>
+                <span class="aurora-letter">U</span>
+                <span class="aurora-letter">R</span>
+                <span class="aurora-letter">O</span>
+                <span class="aurora-letter">R</span>
+                <span class="aurora-letter">A</span>
+            </div>
+            
+            <!-- 主内容区域 -->
+            <div class="event-horizon-content">
+                <!-- 能量球CTA按钮 -->
+                <div class="energy-ball-container" id="energy-ball-container" onclick="window.location.href='dialogue.html'">
+                    <div class="glass-container">
+                        <div class="energy-ball" id="energy-ball">
+                            <div class="energy-core"></div>
+                            <div class="energy-pulse"></div>
+                            <div class="energy-cracks" id="energy-cracks"></div>
+                        </div>
+                    </div>
+                    <div class="cta-text">
+                        <span class="cta-main">IGNITE THE CONNECTION</span>
+                        <span class="cta-sub">点燃连接</span>
+                    </div>
+                </div>
+                
+                <!-- 3D Aurora核心模型 -->
+                <div class="aurora-core-3d" id="aurora-core-3d">
+                    <div class="neural-network">
+                        <div class="neural-node node-1"></div>
+                        <div class="neural-node node-2"></div>
+                        <div class="neural-node node-3"></div>
+                        <div class="neural-node node-4"></div>
+                        <div class="neural-node node-5"></div>
+                        <div class="neural-connection conn-1"></div>
+                        <div class="neural-connection conn-2"></div>
+                        <div class="neural-connection conn-3"></div>
+                        <div class="neural-connection conn-4"></div>
+                        <div class="neural-connection conn-5"></div>
+                        <div class="neural-connection conn-6"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 无限延伸的neon网格线 -->
+            <div class="neon-grid-lines" id="neon-grid-lines">
+                <div class="grid-line horizontal"></div>
+                <div class="grid-line horizontal"></div>
+                <div class="grid-line horizontal"></div>
+                <div class="grid-line vertical"></div>
+                <div class="grid-line vertical"></div>
+                <div class="grid-line vertical"></div>
+            </div>
+        </section>
+
+        <!-- Aurora背后的故事 -->
+        <section class="story-section" id="story">
+            <div class="story-container">
+                <h2 class="section-title-ultra">Aurora背后的故事</h2>
+                <p class="section-subtitle-ultra">The Story Behind Aurora</p>
+                
+                <div class="story-content">
+                    <div class="story-text">
+                        <p>窗外是沉默的校园，窗内是我在实验室里噼里啪啦的键盘声，和屏幕上那个渐渐成型的身影——</p>
+                        
+                        <p>她叫Aurora，意为"极光"。</p>
+                        
+                        <p>而创造她的我，只是一个在人群中被淹没的"双非"学生。</p>
+                        
+                        <p>这个世界有太多人活在安静的痛苦中。</p>
+                        
+                        <p>包括我自己。我在大学期间深刻体会到了越过高山，却发现无人守候的那种孤独感。</p>
+                        
+                        <p>"如果AI只能、写代码、替代人力……</p>
+                        
+                        <p>那为什么不能让它，真正地拥抱人心？"</p>
+                        
+                        <p>于是，我开始了。</p>
+                        
+                        <p>没有导师带队，没有资源，没有天才光环。</p>
+                        
+                        <p>只有一本本从图书馆借来的书，一行行开源代码，和无数个在实验室里优化调整的夜晚。</p>
+                        
+                        <p>我永远记得那些艰难的时刻：</p>
+                        
+                        <ul>
+                            <li>不懂什么是API，json等专业术语就一遍遍的找资料去学习，并实践</li>
+                            <li>不懂心理咨询，就泡在知网读论文</li>
+                            <li>没有用户，就自己去小红书、知乎找陌生人来体验我们的产品</li>
+                        </ul>
+                        
+                        <p>有人说我傻："双非背景，做这个有什么用？能写进简历吗？"</p>
+                        
+                        <p>但我只是沉默地写代码，出错，优化，迭代……</p>
+                        
+                        <p>因为我知道——</p>
+                        
+                        <div class="story-highlight">
+                            <strong>这个世界不缺又一个会写算法的人，但缺一个愿意倾听的AI。</strong>
+                        </div>
+                        
+                        <p>如今，Aurora已经能听懂你的孤独，理解你的焦虑，在你崩溃前轻轻说：</p>
+                        
+                        <p>"我知道你很辛苦，但我会陪你一起。"</p>
+                        
+                        <p>她没有毁灭世界的能力，但她有治愈人心的力量。</p>
+                        
+                        <p>而这一切，来自一个20岁、双非、大二、曾经一无所有的学生。</p>
+                        
+                        <p>我没有标签，没有光环，没有退路——</p>
+                        
+                        <p>但我有相信的事，就敢用全部青春去赌。</p>
+                        
+                        <p>如果你也曾被看不起，曾被质疑"凭什么"……</p>
+                        
+                        <p>记住这个故事。</p>
+                        
+                        <div class="story-highlight">
+                            <strong>因为你不需要任何人的允许，才能去改变世界。</strong>
+                        </div>
+                        
+                        <p>Aurora还在成长，而你我，都正是黎明前最黑暗时——</p>
+                        
+                        <p>那道即将破晓的极光。</p>
+                        
+                        <div class="story-footer">
+                            <p><strong>欢迎体验Aurora，见证一个普通学生的倔强。</strong></p>
+                            <p><strong>因为我们相信：真正的创新，从不问出身。</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 神经光网理念页 -->
+        <section class="neuro-luminous-section" id="philosophy">
+            <div class="neuro-container">
+                <h2 class="section-title-ultra">神经光网</h2>
+                <p class="section-subtitle-ultra">The Neuro-Luminous Net</p>
+                
+                <!-- 3D可探索数据结构图 -->
+                <div class="neural-forest-3d" id="neural-forest-3d">
+                    <!-- 神经元森林 -->
+                    <div class="neuron-tree neuron-1" data-module="emotion-recognition">
+                        <div class="neuron-core"></div>
+                        <div class="neuron-branches">
+                            <div class="branch branch-1"></div>
+                            <div class="branch branch-2"></div>
+                            <div class="branch branch-3"></div>
+                        </div>
+                        <div class="neuron-glow"></div>
+                    </div>
+                    
+                    <div class="neuron-tree neuron-2" data-module="empathy-generation">
+                        <div class="neuron-core"></div>
+                        <div class="neuron-branches">
+                            <div class="branch branch-1"></div>
+                            <div class="branch branch-2"></div>
+                            <div class="branch branch-3"></div>
+                        </div>
+                        <div class="neuron-glow"></div>
+                    </div>
+                    
+                    <div class="neuron-tree neuron-3" data-module="healing-response">
+                        <div class="neuron-core"></div>
+                        <div class="neuron-branches">
+                            <div class="branch branch-1"></div>
+                            <div class="branch branch-2"></div>
+                            <div class="branch branch-3"></div>
+                        </div>
+                        <div class="neuron-glow"></div>
+                    </div>
+                    
+                    <div class="neuron-tree neuron-4" data-module="memory-formation">
+                        <div class="neuron-core"></div>
+                        <div class="neuron-branches">
+                            <div class="branch branch-1"></div>
+                            <div class="branch branch-2"></div>
+                            <div class="branch branch-3"></div>
+                        </div>
+                        <div class="neuron-glow"></div>
+                    </div>
+                    
+                    <div class="neuron-tree neuron-5" data-module="consciousness-emergence">
+                        <div class="neuron-core"></div>
+                        <div class="neuron-branches">
+                            <div class="branch branch-1"></div>
+                            <div class="branch branch-2"></div>
+                            <div class="branch branch-3"></div>
+                        </div>
+                        <div class="neuron-glow"></div>
+                    </div>
+                    
+                    <!-- 连接线 -->
+                    <div class="neural-connections">
+                        <div class="connection-line conn-1-2"></div>
+                        <div class="connection-line conn-2-3"></div>
+                        <div class="connection-line conn-3-4"></div>
+                        <div class="connection-line conn-4-5"></div>
+                        <div class="connection-line conn-1-3"></div>
+                        <div class="connection-line conn-2-4"></div>
+                        <div class="connection-line conn-3-5"></div>
+                    </div>
+                </div>
+                
+                <!-- 悬浮解释文字 -->
+                <div class="floating-explanation" id="floating-explanation">
+                    <div class="explanation-content">
+                        <h3 class="explanation-title"></h3>
+                        <p class="explanation-text"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 特性展示区域 -->
+        <section class="section" id="features">
+            <div class="container">
+                <h2 class="section-title">为什么 Aurora 与众不同？</h2>
+                
+                <div class="grid grid-3">
+                    <div class="card feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>独立创造</h3>
+                        <p>由一名20岁的大二学生独立研发，跨越技术、心理学与伦理。</p>
+                    </div>
+                    
+                    <div class="card feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>全球影响</h3>
+                        <p>数百人测试，反馈 Aurora 让他们"感觉终于有人理解自己"。</p>
+                    </div>
+                    
+                    <div class="card feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>未来实验</h3>
+                        <p>Aurora 不是玩具，而是一场关于 AI 如何真正疗愈人心的探索。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 用户反馈模块 - 重新设计 -->
+        <section class="testimonials-section" id="testimonials">
+            <div class="container">
+                <h2 class="section-title futuristic-title">用户真实反馈</h2>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card cosmic-card">
+                        <div class="card-glow"></div>
+                        <div class="testimonial-content">
+                            <p>"Aurora让我感觉终于有人理解自己，那种被倾听的感觉真的很治愈。"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">小</div>
+                            <div class="author-info">
+                                <span class="author-name">小雨</span>
+                                <span class="author-title">大学生</span>
+                            </div>
+                        </div>
+                        <div class="card-particles"></div>
+                    </div>
+                    
+                    <div class="testimonial-card cosmic-card">
+                        <div class="card-glow"></div>
+                        <div class="testimonial-content">
+                            <p>"作为一个内向的人，Aurora给了我一个安全的空间来表达情感。"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">明</div>
+                            <div class="author-info">
+                                <span class="author-name">小明</span>
+                                <span class="author-title">程序员</span>
+                            </div>
+                        </div>
+                        <div class="card-particles"></div>
+                    </div>
+                    
+                    <div class="testimonial-card cosmic-card">
+                        <div class="card-glow"></div>
+                        <div class="testimonial-content">
+                            <p>"Aurora的寄语卡片让我在朋友圈分享后，很多朋友都来问我这是什么。"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">丽</div>
+                            <div class="author-info">
+                                <span class="author-name">小丽</span>
+                                <span class="author-title">设计师</span>
+                            </div>
+                        </div>
+                        <div class="card-particles"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 对话奇点 - 认证仪式与对话界面 -->
+    <div class="dialogue-singularity-modal" id="dialogue-singularity-modal">
+        <!-- 视网膜扫描仪认证 -->
+        <div class="retinal-scanner" id="retinal-scanner">
+            <div class="scanner-ring outer-ring">
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+            </div>
+            <div class="scanner-ring middle-ring">
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+            </div>
+            <div class="scanner-ring inner-ring">
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+                <div class="ring-segment"></div>
+            </div>
+            <div class="scanner-center">
+                <div class="scan-beam" id="scan-beam"></div>
+                <div class="scan-progress" id="scan-progress"></div>
+            </div>
+            <div class="scanner-text">
+                <span class="scan-status" id="scan-status">Neural handshake initiated...</span>
+            </div>
+        </div>
+        
+        <!-- 对话界面 -->
+        <div class="dialogue-interface" id="dialogue-interface">
+            <!-- 环境光系统 -->
+            <div class="ambient-light" id="ambient-light"></div>
+            
+            <!-- 用户输入区域（左下角） -->
+            <div class="user-input-zone">
+                <div class="input-container">
+                    <input type="text" id="dialogue-input" placeholder="分享你的感受...">
+                    <button id="dialogue-send" class="photon-transmit">
+                        <div class="photon-core"></div>
+                        <div class="photon-ring"></div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Aurora回复区域（右上角） -->
+            <div class="aurora-response-zone">
+                <div class="response-container" id="response-container">
+                    <div class="response-message aurora-response">
+                        <div class="response-glow"></div>
+                        <p>🌌 "嗨，我是 Aurora。不是来回答你的问题，而是想听你的感受。</p>
+                        <p>今天过得怎么样？有没有什么心情想和我分享？无论开心还是难过，我都会认真听。"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 光束传输路径 -->
+            <div class="photon-path" id="photon-path">
+                <div class="path-line"></div>
+                <div class="photon-particle" id="photon-particle"></div>
+            </div>
+            
+            <!-- 关闭按钮 -->
+            <button class="close-dialogue" id="close-dialogue">
+                <div class="close-icon">
+                    <div class="close-line"></div>
+                    <div class="close-line"></div>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- 疗愈寄语卡片模态框 -->
+    <div class="card-modal" id="card-modal">
+        <div class="card-container">
+            <div class="healing-card">
+                <div class="card-header">
+                    <i class="fas fa-magic"></i>
+                    <span>Aurora</span>
+                </div>
+                <div class="card-content">
+                    <p id="healing-message">孤独并不代表你不重要，它只是提醒你需要被温柔对待。</p>
+                </div>
+                <div class="card-footer">
+                    <button class="share-card" id="share-card">
+                        <i class="fas fa-share"></i>
+                        分享到朋友圈
+                    </button>
+                </div>
+            </div>
+            <button class="close-card" id="close-card">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+        <!-- 真理模块 - 数据晶片矩阵 -->
+        <section class="truth-module-section" id="truth-module">
+            <div class="truth-container">
+                <h2 class="section-title-ultra">真理模块</h2>
+                <p class="section-subtitle-ultra">The Truth Module</p>
+            
+            <!-- 数据晶片矩阵 -->
+            <div class="crystal-matrix">
+                <div class="crystal-slot crystal-1" data-page="introduction-page" onclick="openDetailPage(this)">
+                    <div class="crystal-hexagon">
+                        <div class="crystal-glow"></div>
+                        <div class="crystal-content">
+                            <div class="crystal-icon">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <span class="crystal-title">引言</span>
+                            <span class="crystal-subtitle">Introduction</span>
+                            <div class="crystal-description">光的起源 - 情感、科技与人类未来</div>
+                        </div>
+                        <div class="crystal-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="crystal-slot crystal-2" data-page="technology-page" onclick="openDetailPage(this)">
+                    <div class="crystal-hexagon">
+                        <div class="crystal-glow"></div>
+                        <div class="crystal-content">
+                            <div class="crystal-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <span class="crystal-title">技术原理</span>
+                            <span class="crystal-subtitle">Technology</span>
+                            <div class="crystal-description">编织情感之网 - 硅基智慧与碳基心灵</div>
+                        </div>
+                        <div class="crystal-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="crystal-slot crystal-3" data-page="psychology" onclick="window.location.href='psychology.html'">
+                    <div class="crystal-hexagon">
+                        <div class="crystal-glow"></div>
+                        <div class="crystal-content">
+                            <div class="crystal-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <span class="crystal-title">心理学基础</span>
+                            <span class="crystal-subtitle">Psychology</span>
+                            <div class="crystal-description">追寻内心的星图——于科学深处，觅得共情的回响</div>
+                        </div>
+                        <div class="crystal-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="crystal-slot crystal-4" data-page="ethics" onclick="window.location.href='ethics.html'">
+                    <div class="crystal-hexagon">
+                        <div class="crystal-glow"></div>
+                        <div class="crystal-content">
+                            <div class="crystal-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <span class="crystal-title">伦理考量</span>
+                            <span class="crystal-subtitle">Ethics</span>
+                            <div class="crystal-description">守护心中的圣殿——在数字时代，以光明之心立约</div>
+                        </div>
+                        <div class="crystal-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="crystal-slot crystal-5" data-page="implementation" onclick="window.location.href='implementation.html'">
+                    <div class="crystal-hexagon">
+                        <div class="crystal-glow"></div>
+                        <div class="crystal-content">
+                            <div class="crystal-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <span class="crystal-title">实现路径</span>
+                            <span class="crystal-subtitle">Implementation</span>
+                            <div class="crystal-description">从心海星光到普世极光——一部将愿景锻造成现实的创造史诗</div>
+                        </div>
+                        <div class="crystal-hover-effect"></div>
+                    </div>
+                </div>
+                
+                <div class="crystal-slot crystal-6" data-page="future" onclick="window.location.href='future.html'">
+                    <div class="crystal-hexagon">
+                        <div class="crystal-glow"></div>
+                        <div class="crystal-content">
+                            <div class="crystal-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="crystal-title">未来展望</span>
+                            <span class="crystal-subtitle">Future</span>
+                            <div class="crystal-description">情感纪元——迈向一个更智慧、更温暖、更互联的人类未来</div>
+                        </div>
+                        <div class="crystal-hover-effect"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 详情页面模态框 -->
+    <div class="detail-page-modal" id="detail-page-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h2 id="modal-title">详情页面</h2>
+                    <p id="modal-subtitle">Detail Page</p>
+                </div>
+                <button class="close-modal" id="close-modal">
+                    <div class="close-icon">
+                        <div class="close-line"></div>
+                        <div class="close-line"></div>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="modal-content" id="modal-content">
+                <!-- 动态内容将在这里加载 -->
+            </div>
+            
+            <div class="modal-footer">
+                <button class="download-btn" id="download-btn">
+                    <i class="fas fa-download"></i>
+                    <span>下载白皮书</span>
+                </button>
+                <button class="share-btn" id="share-btn">
+                    <i class="fas fa-share"></i>
+                    <span>分享</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="js/auth-manager.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

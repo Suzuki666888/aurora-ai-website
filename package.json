@@ -1,0 +1,31 @@
+{
+  "name": "aurora-local-server",
+  "version": "1.0.0",
+  "description": "Aurora情感疗愈AI助手 - 本地服务器版本",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "python": "python3 start-local-server.py"
+  },
+  "keywords": [
+    "aurora",
+    "ai",
+    "chatbot",
+    "emotional-support",
+    "local-server"
+  ],
+  "author": "Aurora Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Suzuki666888/aurora-ai-website.git"
+  },
+  "homepage": "https://suzuki666888.github.io/aurora-ai-website/"
+}

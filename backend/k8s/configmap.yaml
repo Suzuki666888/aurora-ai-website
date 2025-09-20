@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aurora-config
+  namespace: aurora
+data:
+  NODE_ENV: "production"
+  PORT: "3000"
+  DB_HOST: "postgres-service"
+  DB_PORT: "5432"
+  DB_NAME: "aurora_db"
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
+  MONGO_URI: "mongodb://aurora_admin:aurora_password@mongodb-service:27017/aurora_chat"
+  EMOTION_SERVICE_URL: "http://emotion-service:8000"

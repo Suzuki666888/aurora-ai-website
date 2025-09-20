@@ -16,6 +16,7 @@ yarn-error.log*
 
 # 依赖目录
 node_modules/
+backend/node_modules/
 npm/
 yarn/
 
@@ -59,6 +60,8 @@ venv.bak/
 *.db
 *.sqlite
 *.sqlite3
+backend/data/
+backend/logs/
 
 # 备份文件
 *.bak
